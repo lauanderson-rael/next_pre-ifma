@@ -1,24 +1,24 @@
-
+import Link from "next/link";
+import LoginPage from "./login/page";
 
 export default function Home() {
   return (
-    <div className="">
-      <main className="flex flex-col  row-start-2 items-center sm:items-start">
-         <div className=" bg-green-600 h-[100px] w-screen  flex justify-center items-center ">
+   <LoginPage/>
+   //  <div className="">
+   //    <main className="flex flex-col  row-start-2 items-center sm:items-start">
 
-         </div>
-         <div className=" bg-green-600 h-[200px] w-screen  flex justify-center items-center rounded-[0px_0px_64px_64px]">
-            <h1 className="text-4xl font-bold text-white">Bem vindo ao PRE-IFMA</h1>
+   //       <div className=" bg-gray-900 h-[200px] w-screen  flex justify-center items-center gap-3">
+   //          <h1 className="text-4xl font-bold text-white">Bem vindo ao PRE-IFMA</h1>
 
-            <button className="text-white bg-green-600 p-4 rounded-lg">
-               <a href="login">PAGINA DE LOGIN</a>
-            </button>
+   //          <button className="text-white bg-green-600 p-4 rounded-lg">
+   //             <Link href="login">PAGINA DE LOGIN</Link>
+   //          </button>
 
-            <button className="text-white bg-blue-600 p-4 rounded-lg">
-               <a href="singUp">PAGINA DE CRIAR CONTA</a>
-            </button>
-         </div>
-      </main>
-    </div>
+   //          <button className="text-white bg-blue-600 p-4 rounded-lg">
+   //             <Link href="signUp">PAGINA DE CADASTRO</Link>
+   //          </button>
+   //       </div>
+   //    </main>
+   //  </div>
   );
 }
