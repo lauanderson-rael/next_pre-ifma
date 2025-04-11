@@ -1,17 +1,18 @@
 import { MdAlternateEmail } from "react-icons/md";
 import { FiLock } from "react-icons/fi";
 import { FiUser } from "react-icons/fi";
+import Image from "next/image";
+import Link from "next/link";
 
-export default function LoginPage() {
+export default function SignUpPage() {
    return (
-      <main className="flex flex-col min-h-screen items-center gap-20 bg-gray-100">
+      <main className="flex flex-col min-h-screen items-center gap-4 sm:gap-16 bg-gray-100">
 
          <div className=" bg-green-600 h-[200px] w-screen flex flex-col justify-center items-center ">
-         <h1 className="text-4xl font-extrabold text-white">PRE-IFMA</h1>
-         <div className="text-sm text-gray-100">O seu preparatório para ingressar no IFMA</div>
+            <h1 className="text-4xl font-extrabold text-white">PRÉ-IFMA</h1>
+            <div className="text-sm text-gray-200">O seu preparatório para ingressar no IFMA</div>
+             <Image className="mt-5"  src="/logo.png" alt="logo" width={90} height={90} quality={100} />
          </div>
-
-         <img className="fixed mt-[138px]" src="/logo.png" alt="logo" width={130} />
 
          <div className="w-full max-w-md sm:bg-white p-6 sm:rounded-lg sm:shadow-md">
             <h2 className="text-2xl font-extrabold text-center text-black mb-6">
@@ -65,9 +66,9 @@ export default function LoginPage() {
 
             <div className="mt-2 text-center text-[14px]">
                <span>Já possue uma conta? </span>
-               <a href="login" className="text-sm text-black underline">
+               <Link href="/login" className="text-sm text-black underline">
                Faça o login
-               </a>
+               </Link>
             </div>
          </div>
       </main>
