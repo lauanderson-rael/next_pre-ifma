@@ -1,5 +1,5 @@
+/*descricao: componente de opcao de disciplina da tela home */
 import { ReactNode } from "react";
-import { IoBookSharp } from "react-icons/io5";
 
 interface OptionProps {
    name: string;
@@ -9,7 +9,7 @@ interface OptionProps {
 
 export default function Option({name, bgColor, icon}: OptionProps) {
    return (
-      <div className={`flex gap-2 justify-between rounded p-4 sm:w-[300px] hover:opacity-75`} style={{ backgroundColor: bgColor }}>
+      <div className={`flex gap-2 justify-between rounded p-4  hover:opacity-75`} style={{ backgroundColor: bgColor }}>
          <div className="font-bold text-gray-800">{name}</div>
          {icon}
       </div>

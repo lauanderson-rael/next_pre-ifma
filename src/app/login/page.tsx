@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function LoginPage() {
    return (
-      <main className="flex flex-col min-h-screen items-center gap-20 bg-gray-100">
+      <main className="flex flex-col min-h-screen items-center gap-4 sm:gap-16 bg-gray-100">
 
          <div className=" bg-green-600 h-[200px] w-screen flex flex-col justify-center items-center ">
             <h1 className="text-4xl font-extrabold text-white">PRÉ-IFMA</h1>
@@ -52,7 +52,7 @@ export default function LoginPage() {
             <div className="mt-2 text-center text-[14px]">
            <span>Ainda não possue uma conta? </span>
 
-               <Link href="/signUp" className=" text-black underline">Cadastre-se</Link>
+               <Link href="/register" className=" text-black underline">Cadastre-se</Link>
             </div>
          </div>
       </main>

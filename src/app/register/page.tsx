@@ -4,7 +4,7 @@ import { FiUser } from "react-icons/fi";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function SignUpPage() {
+export default function RegisterPage() {
    return (
       <main className="flex flex-col min-h-screen items-center gap-4 sm:gap-16 bg-gray-100">
 

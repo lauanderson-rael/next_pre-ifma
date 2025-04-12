@@ -1,5 +1,5 @@
+/* descricao: barra inferior para navegacao mobile */
 'use client';
-
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { IoHome} from "react-icons/io5";
@@ -9,7 +9,6 @@ import { FaUserCog } from "react-icons/fa";
 export default function BottomNav() {
    const pathname = usePathname();
 
-    // botoes do menu mobile
    const navItems = [
       { href: "/home", icon: <IoHome size={24} />, label: "Início" },
       { href: "/home/provas", icon: <AiOutlineProfile size={24} />, label: "Provas" },
@@ -17,7 +16,7 @@ export default function BottomNav() {
    ];
 
    return (
-      <div className="w-screen flex justify-center">
+      <div className="w-screen flex justify-center md:hidden">
 
          <nav className="fixed bottom-0 w-[92%] bg-green-600 z-50 mb-3 rounded">
             <div className="flex justify-around items-center h-16">

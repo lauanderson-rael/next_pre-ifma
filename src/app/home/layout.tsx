@@ -1,5 +1,6 @@
 import Header from "../components/header"
-import BottomNav from "./components/bottomNav/bottomNav"
+import BottomNav from "./components/bottomNav"
+import Sidebar from "./components/sidebar"
 
 export default function DashboardLayout({
    children,
@@ -7,10 +8,28 @@ export default function DashboardLayout({
    children: React.ReactNode
 }) {
    return (
-         <>
-            <Header/>
-               <main>{children}</main>
-            <BottomNav/>
-         </>
+      <>
+
+         <Header />
+         <main className="md:flex">
+            <Sidebar />
+
+            <div className=" md:w-[100%]">
+               {children}
+            </div>
+         </main>
+         <BottomNav />
+
+      </>
+
    )
 }
+
+
+
+{/* <>
+<Header />
+<Sidebar />
+<main className="pt-16 p-4 sm:pl-52">{children}</main>
+<BottomNav />
+</> */}
