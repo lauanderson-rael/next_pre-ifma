@@ -1,13 +1,13 @@
 'use client';
 import Container from "../components/container";
-import Option from "./components/option";
+import Option from "./components/option/option";
 import { IoBookSharp } from "react-icons/io5";
 import { SiLibreofficemath } from "react-icons/si";
 import { AiOutlineProfile } from "react-icons/ai";
 export default function Home() {
    return (
       <Container>
-         <h1 className="text-2xl font-bold mt-1">Estude</h1>
+         <h1 className="text-2xl font-bold mt-1 text-center">O que deseja estudar?</h1>
 
          <div className="mt-4 flex flex-col gap-2">
             <Option
@@ -27,7 +27,6 @@ export default function Home() {
             bgColor="#E6E6E6"
             icon={<AiOutlineProfile size={24} fill="black" />}
             />
-
 
          </div>
       </Container>

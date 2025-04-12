@@ -1,4 +1,5 @@
 import Header from "../components/header"
+import BottomNav from "./components/bottomNav/bottomNav"
 
 export default function DashboardLayout({
    children,
@@ -8,7 +9,8 @@ export default function DashboardLayout({
    return (
          <>
             <Header/>
-            <main>{children}</main>
+               <main>{children}</main>
+            <BottomNav/>
          </>
    )
 }
