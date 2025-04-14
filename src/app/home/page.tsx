@@ -8,7 +8,6 @@ import { FaCheckCircle } from "react-icons/fa";
 import { RiNumbersFill } from "react-icons/ri";
 
 
-
 export default function Home() {
    return (
       <div className="mx-auto px-3">
@@ -36,12 +35,9 @@ export default function Home() {
 
          </div>
 
+         <p className="text-xl font-bold text-center text-gray-600 mt-5 mb-2.5 ">Estatísticas</p>
 
-
-
-         <p className="text-xl font-bold mt-1 text-center text-gray-600">Estatísticas</p>
-
-         <div className="flex gap-2 mt-2">
+         <div className="flex gap-2 mt-4">
             <CardInfo
 
                   title="Questões Resolvidas"

@@ -9,19 +9,16 @@ export default function DashboardLayout({
 }) {
    return (
       <>
-
          <Header />
          <main className="md:flex">
             <Sidebar />
 
-            <div className=" md:w-[100%]">
+            <div className=" md:w-[100%] md:px-[300px] md:mt-4">
                {children}
             </div>
          </main>
          <BottomNav />
-
       </>
-
    )
 }
 

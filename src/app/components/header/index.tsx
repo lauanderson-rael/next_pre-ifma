@@ -7,8 +7,8 @@ export default function Header(){
             <FaRegCircleUser size={26} fill="white"/>
             <div>Olá, Júnior</div>
          </div>
-
-         <div className="flex justify-between items-center gap-1 bg-white p-1 rounded text-black">
+         {/* icone ofensiva */}
+         <div className="flex justify-between items-center gap-1 bg-white rounded text-black py-1 pl-1 pr-2">
             <BsFire size={18} fill="orange"/>
             12
          </div>
