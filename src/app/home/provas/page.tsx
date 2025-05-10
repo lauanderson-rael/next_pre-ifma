@@ -1,20 +1,3 @@
-// 'use client';
-// export default function ProvasPage() {
-//    return (
-//       <main className="flex flex-col items-center gap-20 bg-gray-100">
-
-//         <h1>Pagina de Provas</h1>
-//          <div>
-//             <b>selecione o ano:</b>
-//             <select>
-//                <option>2023</option>
-//                <option>2022</option>
-//                <option>2021</option>
-//             </select>
-//          </div>
-//       </main>
-//    );
-// }
 
 'use client';
 
@@ -38,13 +21,14 @@ export default function ProvasPage() {
   };
 
   return (
-    <main className="flex flex-col items-center gap-10 bg-gray-100 h-100">
+    <div >
       <TopTitle title="Baixar seletivos anteriores" />
+      <main className=" flex flex-col items-center gap-4  max-h-[calc(100dvh-160px)] overflow-y-auto">
 
-      <section className="w-full max-w-xl space-y-6 px-4">
+      <section className="w-full max-w-xl space-y-2 px-4 mt-2">
         {/* Tipo de prova */}
         <div>
-          <label className="block mb-2 text-gray-700 font-medium">Tipo de prova</label>
+          <label className="block mb-2 text-gray-700 font-medium">Selecione o tipo de prova</label>
           <select
             value={tipo}
             onChange={(e) => setTipo(e.target.value)}
@@ -106,32 +90,34 @@ export default function ProvasPage() {
 
       {/* Resultados */}
       {mostrarResultados && (
-        <section className="w-full max-w-3xl mt-8 grid md:grid-cols-2 gap-6 px-4">
-          <div className="bg-green-50 border border-green-300 p-6 rounded-lg shadow">
-            <h3 className="text-lg font-semibold text-green-800 mb-2">
+        <section className="w-full max-w-3xl flex flex-col gap-6 px-4 my-6">
+          <div className="text-center">Resultado:</div>
+          <div className="flex justify-between items-center bg-gray-400 shadow p-4 rounded-lg shadow ">
+            <h3 className="text-lg font-semibold text-black mb-2 ">
               Prova - {ano} ({campus})
             </h3>
             <a
               href="#"
-              className="inline-block mt-2 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+              className="inline-block px-4 py-2 bg-red-700 text-white rounded hover:bg-red-900"
             >
               Baixar PDF
             </a>
           </div>
 
-          <div className="bg-green-50 border border-green-300 p-6 rounded-lg shadow">
-            <h3 className="text-lg font-semibold text-green-800 mb-2">
+          <div className="flex justify-between items-center bg-gray-400 p-4 rounded-lg shadow ">
+            <h3 className="text-lg font-semibold text-black mb-2">
               Gabarito - {ano} ({campus})
             </h3>
             <a
               href="#"
-              className="inline-block mt-2 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+              className="inline-block px-4 py-2 bg-red-700 text-white rounded hover:bg-red-900"
             >
               Baixar PDF
             </a>
-          </div>
+          </div>  
         </section>
       )}
-    </main>
+      </main>
+    </div>
   );
 }

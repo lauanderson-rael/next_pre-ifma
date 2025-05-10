@@ -13,7 +13,7 @@ export default function DashboardLayout({
          <main className="md:flex">
             <Sidebar />
 
-            <div className=" md:w-[100%]  ">
+            <div className=" md:w-[100%] ">
                {children}
             </div>
          </main>
