@@ -13,7 +13,7 @@ export default function DashboardLayout({
          <main className="md:flex">
             <Sidebar />
 
-            <div className=" md:w-[100%] md:px-[300px] md:mt-4">
+            <div className=" md:w-[100%]  ">
                {children}
             </div>
          </main>
@@ -22,11 +22,5 @@ export default function DashboardLayout({
    )
 }
 
-
-
-{/* <>
-<Header />
-<Sidebar />
-<main className="pt-16 p-4 sm:pl-52">{children}</main>
-<BottomNav />
-</> */}
+// responsivo
+//2 div -->  md:px-[300px] md:mt-4

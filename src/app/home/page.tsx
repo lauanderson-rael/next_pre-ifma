@@ -10,7 +10,7 @@ import { RiNumbersFill } from "react-icons/ri";
 
 export default function Home() {
    return (
-      <div className="mx-auto px-3">
+      <div className="mx-auto px-3  md:px-[300px]">
 
          <h1 className="text-2xl font-bold mt-2 text-center">O que deseja estudar?</h1>
 
