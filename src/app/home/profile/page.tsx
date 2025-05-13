@@ -2,6 +2,7 @@
 import { FiLogOut } from "react-icons/fi";
 import TopTitle from "../components/topTitle";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function ProfilePage() {
    return (
@@ -20,11 +21,10 @@ export default function ProfilePage() {
             </div>
          </main>
 
-         <button className="mx-auto flex justify-center items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+         <Link href="/" className="mx-auto flex justify-center items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
             Logout
             <FiLogOut />
-         </button>
-
+         </Link>
       </div>
    );
 }
