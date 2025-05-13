@@ -6,6 +6,7 @@ import { SiLibreofficemath } from "react-icons/si";
 import { AiOutlineProfile } from "react-icons/ai";
 import { FaCheckCircle } from "react-icons/fa";
 import { RiNumbersFill } from "react-icons/ri";
+import Link from "next/link";
 
 
 export default function Home() {
@@ -15,11 +16,13 @@ export default function Home() {
          <h1 className="text-2xl font-bold mt-2 text-center">O que deseja estudar?</h1>
 
          <div className="mt-4 flex flex-col gap-2">
+            <Link href={"/questions"}>
             <Option
             name="Português"
             bgColor="#F0BE84"
             icon={<IoBookSharp size={24} fill="blue" />}
             />
+            </Link>
 
             <Option
             name="Matemática"
