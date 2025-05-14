@@ -1,27 +1,29 @@
 https://estudenoifma.ifma.edu.br/tecnico-2024/provas-anteriores/
 
 
+1. GET - Listar todas as questões do simulado
+http://45.79.223.162/api/simulates/questions
+
+2. GET - Ver uma questão específica (troque 1 por um ID válido)
+http://45.79.223.162/api/simulates/questions/1
+
+3. GET - Ver os resultados do simulado
+http://45.79.223.162/api/simulates/results
+
+4. POST - Registro: http://45.79.223.162/api/users/register
+{
+  "username": "Lauanderson Rael",
+  "password": "lauanderson",
+  "email": "lauanderson38@gmail.com"
+}
+
+5. POST - Para login: http://45.79.223.162/api/users/login
+{
+  "email": "joao@example.com",
+  "password": "senha123"
+}
 
 
-
-
-
-
-
-
-formato:
-
-<-               questao 034
-
-
----integrado 2025 - portugues---
-
-a
-b
-c
-d
-
-RESPONDER
-
-----1 de 25----
-anterior    proxima
+usuario de teste 01:
+joao@gmail.com
+joao123
