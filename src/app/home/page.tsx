@@ -6,14 +6,38 @@ import { SiLibreofficemath } from "react-icons/si";
 import { AiOutlineProfile } from "react-icons/ai";
 import { FaCheckCircle } from "react-icons/fa";
 import { RiNumbersFill } from "react-icons/ri";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-
+import { useRouter } from "next/router";
 
 export default function Home() {
+   const router = useRouter()
+   const [user, setUser] = useState<{ email: string; name: string } | null>(null)
+
+   useEffect(() => {
+    const stored = localStorage.getItem('user')
+    if (stored) {
+      const parsed = JSON.parse(stored)
+      setUser(parsed)
+    }else{
+      router.push('/')
+    }
+  }, [])
+
+
    return (
       <div className="mx-auto px-3  md:px-[300px]">
 
          <h1 className="text-2xl font-bold mt-2 text-center">O que deseja estudar?</h1>
+
+         {user ? (
+        <div className="mt-4 bg-green-300">
+          <p><strong>Email:</strong> {user.email}</p>
+          <p><strong>Nome:</strong> {user.name || 'Nome não informado'}</p>
+        </div>
+      ) : (
+        <p>Carregando informações do usuário...</p>
+      )}
 
          <div className="mt-4 flex flex-col gap-2">
             <Link href={"/questions"}>
