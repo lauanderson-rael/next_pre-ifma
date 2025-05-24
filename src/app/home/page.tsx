@@ -8,7 +8,7 @@ import { FaCheckCircle } from "react-icons/fa";
 import { RiNumbersFill } from "react-icons/ri";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
    const router = useRouter()
