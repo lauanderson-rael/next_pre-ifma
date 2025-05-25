@@ -6,43 +6,39 @@ import { FiLock, FiUser } from "react-icons/fi";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { api } from "../services/api";
+import { useForm } from 'react-hook-form'
 
 export default function RegisterPage() {
-  // Estado para os campos do formulário
+  
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  
+  
+  const {register, handleSubmit} = useForm()
 
-  const handleRegister = async (e: React.FormEvent) => {
-    e.preventDefault();
+  async function handleRegister(data: any){
     setError('');
     setSuccess('');
 
-    // Verificar se as senhas coincidem
     if (password !== confirmPassword) {
       setError('As senhas não coincidem');
       return;
     }
 
     try {
-      const response = await fetch('/api/proxy/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, email, password }),
-      });
+     
+      console.log(data)
+      const response = await api.post('/users/register', data)
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Erro ao criar conta');
+      if(response.status === 201){
+        setSuccess('Usuário cadastrado com sucesso!');
       }
-
-      setSuccess('Conta criada com sucesso!');
+      
     } catch (err: any) {
       setError(err.message || 'Erro inesperado');
     }
@@ -59,10 +55,11 @@ export default function RegisterPage() {
       <div className="w-full max-w-md sm:bg-white p-6 sm:rounded-lg sm:shadow-md">
         <h2 className="text-2xl font-extrabold text-center text-black mb-6">Criar conta</h2>
 
-        <form className="space-y-4" onSubmit={handleRegister}>
+        <form className="space-y-4" onSubmit={handleSubmit(handleRegister)}>
           <div className="flex items-center gap-2">
             <label className="block text-sm font-medium text-gray-700"><FiUser size={24} /></label>
             <input
+               {...register('name')}
               type="text"
               className="w-full p-2 border-b outline-none"
               placeholder="Digite seu nome completo"
@@ -75,6 +72,7 @@ export default function RegisterPage() {
           <div className="flex items-center gap-2">
             <label className="block text-sm font-medium text-gray-700"><MdAlternateEmail size={24} /></label>
             <input
+              {... register('email')}
               type="email"
               className="w-full p-2 border-b outline-none"
               placeholder="Digite seu e-mail"
@@ -87,6 +85,7 @@ export default function RegisterPage() {
           <div className="flex items-center gap-2">
             <label className="block text-sm font-medium text-gray-700"><FiLock size={24} /></label>
             <input
+               {... register('password')}
               type="password"
               className="w-full p-2 border-b outline-none"
               placeholder="Digite sua senha"

@@ -1,4 +1,4 @@
-'use client';
+
 import Option from "./components/option";
 import CardInfo from "./components/cardInfo";
 import { IoBookSharp } from "react-icons/io5";
@@ -8,9 +8,7 @@ import { FaCheckCircle } from "react-icons/fa";
 import { RiNumbersFill } from "react-icons/ri";
 import Link from "next/link";
 
-export default function Home() {
-  
-
+export default async function Home() {
 
    return (
       <div className="mx-auto px-3  md:px-[300px]">
@@ -62,3 +60,14 @@ export default function Home() {
       </div>
    );
 }
+
+
+
+// a partir do next13 não fuinciona mais
+// export const getServerSideProps: GetServerSideProps = async (ctx) => {
+
+//    console.log(ctx.req.cookies)
+//    return {
+//        props:{}
+//    }
+// }

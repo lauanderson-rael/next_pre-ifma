@@ -1,49 +1,30 @@
-
 'use client';
 
 import { MdAlternateEmail } from "react-icons/md";
 import { FiLock } from "react-icons/fi";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useContext, useState } from "react";
+import { useForm } from 'react-hook-form'
+import { AuthContext } from "../contexts/AuthContext";
 
 export default function LoginPage() {
+
    const [email, setEmail] = useState('');
    const [password, setPassword] = useState('');
    const [error, setError] = useState('');
    const [loading, setLoading] = useState(false);
-   const router = useRouter();
-
-   const handleLogin = async (e: React.FormEvent) => {
-      e.preventDefault();
-      setError('');
+   
+   
+   const { register, handleSubmit } = useForm()
+   
+   const {signIn} = useContext(AuthContext)
+   async function handleSignIn(data: any){
       setLoading(true);
-
-      try {
-         const response = await fetch('/api/proxy/login', {
-            method: 'POST',
-            headers: {
-               'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email, password }),
-         });
-
-         const data = await response.json();
-
-         if (!response.ok) {
-            throw new Error(data.error || 'Erro ao fazer login');
-         }
-
-         localStorage.setItem('token', data.token);
-         localStorage.setItem('user', JSON.stringify(data))
-         router.push('/home');
-      } catch (err: any) {
-         setError(err.message || 'Erro inesperado');
-      } finally {
-         setLoading(false);
-      }
-   };
+      await signIn(data)
+      setLoading(false)
+   }
+   
 
    return (
       <main className="flex flex-col min-h-screen items-center gap-4 sm:gap-16 bg-gray-100">
@@ -56,12 +37,13 @@ export default function LoginPage() {
          <div className="w-full max-w-md sm:bg-white p-6 sm:rounded-lg sm:shadow-md">
             <h2 className="text-2xl font-extrabold text-center text-black mb-6">Entrar</h2>
 
-            <form className="space-y-4" onSubmit={handleLogin}>
+            <form className="space-y-4" onSubmit={handleSubmit(handleSignIn)}>
                <div className="flex items-center gap-2">
                   <label className="block text-sm font-medium text-gray-700">
                      <MdAlternateEmail size={24} />
                   </label>
                   <input
+                      {...register('email')}
                      type="email"
                      className="w-full p-2 border-b outline-none"
                      placeholder="Digite seu e-mail"
@@ -76,6 +58,7 @@ export default function LoginPage() {
                      <FiLock size={24} />
                   </label>
                   <input
+                     {...register('password')}
                      type="password"
                      className="w-full p-2 border-b outline-none"
                      placeholder="Digite sua senha"
@@ -87,9 +70,8 @@ export default function LoginPage() {
 
                <button
                   type="submit"
-                  className={`w-full p-3 rounded-4xl transition text-white ${
-                     loading ? 'bg-green-700 cursor-not-allowed' : 'bg-green-600 hover:bg-green-700'
-                  }`}
+                  className={`w-full p-3 rounded-4xl transition text-white ${loading ? 'bg-green-700 cursor-not-allowed' : 'bg-green-600 hover:bg-green-700'
+                     }`}
                   disabled={loading}
                >
                   {loading ? 'Carregando...' : 'Acessar'}

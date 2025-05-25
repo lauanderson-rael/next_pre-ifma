@@ -1,12 +1,14 @@
+'use client'
 import Header from "../components/header"
 import BottomNav from "./components/bottomNav"
 import Sidebar from "./components/sidebar"
 
-export default function DashboardLayout({
-   children,
-}: {
-   children: React.ReactNode
-}) {
+export default function DashboardLayout({ children,}: { children: React.ReactNode}) {
+
+   // useEffect(()=> {
+   //    api.get('/simulates/questions')
+   // }, [])
+
    return (
       <>
          <Header />
@@ -22,5 +24,4 @@ export default function DashboardLayout({
    )
 }
 
-// responsivo
-//2 div -->  md:px-[300px] md:mt-4
+

@@ -3,27 +3,25 @@ import { FiLogOut } from "react-icons/fi";
 import TopTitle from "../components/topTitle";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect , useState} from "react";
-import { randomInt } from "crypto";
+import { useContext, useEffect } from "react";
+import { AuthContext } from "@/app/contexts/AuthContext";
 
 export default function ProfilePage() {
   const router = useRouter();
+  const {isAuthenticated, user} = useContext(AuthContext)
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem('preifma.token');
     router.push('/');
   };
 
-    const [user, setUser] = useState<{ email: string; name: string } | null>(null)
-    useEffect(() => {
-      const stored = localStorage.getItem('user')
-      if (!stored) {
-        router.push('/') 
-        return
-      } 
-      const parsed = JSON.parse(stored)
-      setUser(parsed)
-    }, [])
+   useEffect(() => {
+    if (!isAuthenticated) {
+      router.push('/');
+    }
+  }, [isAuthenticated, router]);
+
+
 
   return (
     <div className="flex flex-col justify-between h-100">
