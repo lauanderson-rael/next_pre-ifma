@@ -23,6 +23,13 @@ http://45.79.223.162/api/simulates/results
   "password": "senha123"
 }
 
+6. POST - Para criar questao: https://www.preifma.site/api/questions/create
+{
+  "enunciado": "Qual a capital da França?",
+  "alternativas": ["Paris", "Madrid", "Londres", "Roma"],
+  "resposta_correta": "Paris"
+}
+
 
 usuario de teste 01:
 joao@gmail.com
