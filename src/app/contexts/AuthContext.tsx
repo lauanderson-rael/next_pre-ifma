@@ -1,4 +1,3 @@
-
 'use client'
 import { createContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -26,6 +25,7 @@ export const AuthContext = createContext({} as AuthcontextType)
 export function AuthProvider({children}: any){
     const router = useRouter()
     const [user, setUser] = useState<User | null>(null)
+
     const isAuthenticated = !!user;
 
     useEffect(() => {
@@ -55,6 +55,7 @@ export function AuthProvider({children}: any){
             });
 
             const data = await response.json();
+            console.log('Login bem sucedido!')
 
             if (!response.ok) {
                 throw new Error(data.error || 'Erro ao fazer login');
@@ -76,8 +77,11 @@ export function AuthProvider({children}: any){
             });
 
             router.push('/home');
+            return 
+
         } catch (err: any) {
             console.log(err)
+             throw err;
         }
     }
 

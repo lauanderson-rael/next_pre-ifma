@@ -9,22 +9,26 @@ import { useForm } from 'react-hook-form'
 import { AuthContext } from "../contexts/AuthContext";
 
 export default function LoginPage() {
-
    const [email, setEmail] = useState('');
    const [password, setPassword] = useState('');
    const [error, setError] = useState('');
    const [loading, setLoading] = useState(false);
-   
-   
-   const { register, handleSubmit } = useForm()
-   
-   const {signIn} = useContext(AuthContext)
-   async function handleSignIn(data: any){
+
+   const { register, handleSubmit } = useForm();
+   const { signIn } = useContext(AuthContext);
+
+   async function handleSignIn(data: any) {
       setLoading(true);
-      await signIn(data)
-      setLoading(false)
+      setError(''); // limpar erros anteriores
+
+      try {
+         await signIn(data);
+      } catch (err) {
+         setError('Erro no login. Verifique suas credenciais.');
+      } finally {
+         setLoading(false);
+      }
    }
-   
 
    return (
       <main className="flex flex-col min-h-screen items-center gap-4 sm:gap-16 bg-gray-100">
@@ -43,12 +47,15 @@ export default function LoginPage() {
                      <MdAlternateEmail size={24} />
                   </label>
                   <input
-                      {...register('email')}
+                     {...register('email')}
                      type="email"
                      className="w-full p-2 border-b outline-none"
                      placeholder="Digite seu e-mail"
                      value={email}
-                     onChange={(e) => setEmail(e.target.value)}
+                     onChange={(e) => {
+                        setEmail(e.target.value);
+                        setError(''); // limpa o erro ao digitar
+                     }}
                      required
                   />
                </div>
@@ -63,25 +70,31 @@ export default function LoginPage() {
                      className="w-full p-2 border-b outline-none"
                      placeholder="Digite sua senha"
                      value={password}
-                     onChange={(e) => setPassword(e.target.value)}
+                     onChange={(e) => {
+                        setPassword(e.target.value);
+                        setError(''); // limpa o erro ao digitar
+                     }}
                      required
                   />
                </div>
 
+               {error && (
+                  <div className="bg-red-100 border border-red-400 text-red-700 p-3 rounded text-sm text-center">
+                     {error}
+                  </div>
+               )}
+
                <button
                   type="submit"
-                  className={`w-full p-3 rounded-4xl transition text-white ${loading ? 'bg-green-700 cursor-not-allowed' : 'bg-green-600 hover:bg-green-700'
-                     }`}
+                  className={`w-full p-3 rounded-4xl transition text-white ${loading ? 'bg-green-700 cursor-not-allowed' : 'bg-green-600 hover:bg-green-700'}`}
                   disabled={loading}
                >
                   {loading ? 'Carregando...' : 'Acessar'}
                </button>
             </form>
 
-            {error && <p className="text-red-600 text-sm mt-4 text-center">{error}</p>}
-
             <div className="mt-2 text-center text-[14px]">
-               <span>Ainda não possue uma conta? </span>
+               <span>Ainda não possui uma conta? </span>
                <Link href="/register" className="text-black underline">Cadastre-se</Link>
             </div>
          </div>
