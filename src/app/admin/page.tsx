@@ -35,7 +35,6 @@ export default function CreateQuestionPage() {
     setFormData({ ...formData, correctIndex: index });
   };
 
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -65,6 +64,11 @@ export default function CreateQuestionPage() {
       setStatus('Erro de rede.');
     }
   };
+
+  async function listQuestions (){
+    const res = await api.get('/questions/create')
+    return res.data
+  }
 
   return (
     <div>
