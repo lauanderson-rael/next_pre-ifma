@@ -5,13 +5,14 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "@/app/contexts/AuthContext";
-
+ 
 export default function ProfilePage() {
   const router = useRouter();
   const {isAuthenticated, user} = useContext(AuthContext)
 
   const handleLogout = () => {
     localStorage.removeItem('preifma.token');
+    localStorage.removeItem('preifma.user')
     router.push('/');
   };
 

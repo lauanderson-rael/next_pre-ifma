@@ -2,15 +2,13 @@
 import Header from "../components/header"
 import BottomNav from "./components/bottomNav"
 import Sidebar from "./components/sidebar"
+import { RequireAuth } from "../components/requireAuth"
 
 export default function DashboardLayout({ children,}: { children: React.ReactNode}) {
 
-   // useEffect(()=> {
-   //    api.get('/simulates/questions')
-   // }, [])
-
    return (
       <>
+      <RequireAuth>
          <Header />
          <main className="md:flex">
             <Sidebar />
@@ -20,6 +18,7 @@ export default function DashboardLayout({ children,}: { children: React.ReactNod
             </div>
          </main>
          <BottomNav />
+      </RequireAuth>
       </>
    )
 }

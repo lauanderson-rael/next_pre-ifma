@@ -4,9 +4,10 @@ import { MdAlternateEmail } from "react-icons/md";
 import { FiLock } from "react-icons/fi";
 import Image from "next/image";
 import Link from "next/link";
-import { useContext, useState} from "react";
+import { useContext, useState, useEffect} from "react";
 import { useForm } from 'react-hook-form'
 import { AuthContext } from "../contexts/AuthContext";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
    const [email, setEmail] = useState('');
@@ -15,7 +16,7 @@ export default function LoginPage() {
    const [loading, setLoading] = useState(false);
 
    const { register, handleSubmit } = useForm();
-   const { signIn } = useContext(AuthContext);
+   const { signIn, isAuthenticated } = useContext(AuthContext);
 
    async function handleSignIn(data: any) {
       setLoading(true);
@@ -29,6 +30,13 @@ export default function LoginPage() {
          setLoading(false);
       }
    }
+
+   const router = useRouter()
+   useEffect(() => {
+    if (isAuthenticated) {
+      router.push("/home");
+    }
+  }, [isAuthenticated]);
 
    return (
       <main className="flex flex-col min-h-screen items-center gap-4 sm:gap-16 bg-gray-100">
