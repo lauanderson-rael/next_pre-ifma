@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { api } from '../services/api';
-import HeaderTitle from '@/app/components/headerTitle';
 import TopTitle from '../home/components/topTitle';
 import { FaArrowLeft } from 'react-icons/fa6';
 
@@ -92,7 +91,6 @@ export default function CreateQuestionPage() {
 
   return (
     <div>
-      <HeaderTitle title="ADMIN" icon={<FaArrowLeft size={24} />} href="/home" />
       <TopTitle title="Adicionar nova questão" />
 
       <main className="flex flex-col items-center max-h-[calc(100dvh-160px)] overflow-y-auto">
