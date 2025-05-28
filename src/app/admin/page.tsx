@@ -187,7 +187,7 @@ export default function CreateQuestionPage() {
         <div className="mt-4 w-full max-w-xl mx-auto ">
           <h2 className="text-3xl font-bold mb-6 text-center">Lista de Questoes</h2>
           {questionsList.map((question) => (
-            <div key={question.id} className='border rounded mb-2'>
+            <div key={question.id} className='border rounded mb-2 p-2 m-2'>
               <h3 className="text-xl font-semibold text-gray-800">{question.title}</h3>
               <p className="text-gray-600 mb-3">Descrição: {question.description}</p>
 
