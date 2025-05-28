@@ -1,4 +1,5 @@
-
+"use client"
+import { useEffect, useState } from "react";
 import Option from "./components/option";
 import CardInfo from "./components/cardInfo";
 import { IoBookSharp } from "react-icons/io5";
@@ -7,8 +8,33 @@ import { AiOutlineProfile } from "react-icons/ai";
 import { FaCheckCircle } from "react-icons/fa";
 import { RiNumbersFill } from "react-icons/ri";
 import Link from "next/link";
+import { api } from "../services/api";
 
-export default async function Home() {
+type UserDataType = {
+  email: string;
+  name: string;
+  current_streak: number;
+  count_user_answers: number;
+  count_user_correct_answers: number;
+};
+
+
+export default function Home() {
+
+  const [dataUser, setDataUser] = useState<UserDataType| null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    api.get("/users/data")
+      .then((res) => setDataUser(res.data))
+      .catch((err) => console.error(err))
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) return <p className="text-center text-xl text-green-700 font-semibold mt-8 ">
+   Carregando...
+  </p>;
+
 
    return (
       <div className="mx-auto px-3  md:px-[300px]">
@@ -42,10 +68,9 @@ export default async function Home() {
 
          <div className="flex gap-2 mt-4">
             <CardInfo
-
                   title="Questões Resolvidas"
                   bgColor="#369FFF"
-                  qtd={87}
+                  qtd={dataUser?.count_user_answers as number}
                   icon={<RiNumbersFill size={60} fill="#fff" />}
             />
 
@@ -53,7 +78,7 @@ export default async function Home() {
 
                   title="Quantidade de acertos"
                   bgColor="#319F43"
-                  qtd={76}
+                  qtd={dataUser?.count_user_correct_answers as number}
                   icon={<FaCheckCircle size={60} fill="#fff" />}
             />
          </div>
@@ -61,13 +86,3 @@ export default async function Home() {
    );
 }
 
-
-
-// a partir do next13 não fuinciona mais
-// export const getServerSideProps: GetServerSideProps = async (ctx) => {
-
-//    console.log(ctx.req.cookies)
-//    return {
-//        props:{}
-//    }
-// }

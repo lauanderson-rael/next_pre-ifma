@@ -4,7 +4,7 @@ import { MdAlternateEmail } from "react-icons/md";
 import { FiLock } from "react-icons/fi";
 import Image from "next/image";
 import Link from "next/link";
-import { useContext, useState } from "react";
+import { useContext, useState} from "react";
 import { useForm } from 'react-hook-form'
 import { AuthContext } from "../contexts/AuthContext";
 
