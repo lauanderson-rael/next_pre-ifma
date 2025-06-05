@@ -4,6 +4,7 @@ import { BsFire } from "react-icons/bs";
 import { useContext } from "react";
 
 import { AuthContext } from "../contexts/AuthContext";
+import Link from "next/link";
 
 export default function Header() {
   const {user} = useContext(AuthContext)
@@ -11,7 +12,9 @@ export default function Header() {
   return (
     <header className=" bg-green-600 h-[80px] w-screen flex justify-between items-center text-white px-4 ">
       <div className="flex gap-2">
-        <FaRegCircleUser size={26} fill="white" />
+        <Link href={'/home/profile'}>
+          <FaRegCircleUser size={26} fill="white" />
+         </Link>
         {user ? (
             <div>Olá, {user.name || 'Nome não informado'}</div>
         ) : (

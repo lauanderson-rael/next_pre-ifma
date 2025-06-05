@@ -35,7 +35,7 @@ export default function RegisterPage() {
       const response = await api.post('/users/register', data)
 
       if (response.status === 201) {
-        setSuccess('Usuário cadastrado com sucesso!');
+        setSuccess('Usuário cadastrado com sucesso!'); 
       }
 
     } catch (err: any) {
