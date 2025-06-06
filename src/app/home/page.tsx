@@ -42,7 +42,7 @@ export default function Home() {
          <h1 className="text-2xl font-bold mt-2 text-center">O que deseja estudar?</h1>
 
          <div className="mt-4 flex flex-col gap-2">
-            <Link href={"/filters/1"}>
+            <Link href={"/filters/portugues"}>
             <Option
             name="Português"
             bgColor="#F0BE84"
@@ -50,7 +50,7 @@ export default function Home() {
             />
             </Link>
             
-             <Link href={"/filters/2"}>
+             <Link href={"/filters/matematica"}>
             <Option
             name="Matemática"
             bgColor="#6CB1DB"
@@ -58,7 +58,7 @@ export default function Home() {
             />
             </Link>
 
-             <Link href={"/filters/3"}>
+             <Link href={"/filters/simulado"}>
             <Option
             name="Simulados"
             bgColor="#E6E6E6"

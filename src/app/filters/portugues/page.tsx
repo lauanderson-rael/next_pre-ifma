@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from "react";
@@ -5,14 +6,7 @@ import TopTitle from "../../home/components/topTitle";
 import HeaderTitle from "../../components/headerTitle";
 import { FaArrowLeft } from "react-icons/fa";
 
-type Props = {
-    params: {   discipline: string}
-}
-
-const list = ['', 'português', 'Matemática', 'Simulado']
-
-export default function ProvasPage({params}: Props) {
-
+export default function ProvasPage() {
   const [tipo, setTipo] = useState("");
   const [ano, setAno] = useState("");
   const [campus, setCampus] = useState("");
@@ -29,7 +23,7 @@ export default function ProvasPage({params}: Props) {
   return (
     <div >
       <HeaderTitle title="Filtros" icon={<FaArrowLeft size={24}/> } href='/home'/>
-      <TopTitle title={list[parseInt(params.discipline)]}  />
+      <TopTitle title="Português"  />
       <main className=" flex flex-col items-center gap-4  max-h-[calc(100dvh-160px)] overflow-y-auto">
 
       <section className="w-full max-w-xl space-y-2 px-4 mt-2">
