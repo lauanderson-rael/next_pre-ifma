@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useContext, useState, useEffect} from "react";
 import { useForm } from 'react-hook-form'
-import { AuthContext } from "../contexts/AuthContext";
+import { AuthContext } from "../../contexts/AuthContext";
 import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
@@ -106,7 +106,6 @@ export default function LoginPage() {
                <Link href="/register" className="text-black underline">Cadastre-se</Link>
             </div>
          </div>
-
 
       </main>
    );

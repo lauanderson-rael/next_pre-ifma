@@ -6,7 +6,7 @@ import { FiLock, FiUser } from "react-icons/fi";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { api } from "../services/api";
+import { api } from "../../services/api";
 import { useForm } from 'react-hook-form'
 
 export default function RegisterPage() {

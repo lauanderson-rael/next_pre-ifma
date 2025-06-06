@@ -42,25 +42,29 @@ export default function Home() {
          <h1 className="text-2xl font-bold mt-2 text-center">O que deseja estudar?</h1>
 
          <div className="mt-4 flex flex-col gap-2">
-            <Link href={"/questions"}>
+            <Link href={"/filters/1"}>
             <Option
             name="Português"
             bgColor="#F0BE84"
             icon={<IoBookSharp size={24} fill="blue" />}
             />
             </Link>
-
+            
+             <Link href={"/filters/2"}>
             <Option
             name="Matemática"
             bgColor="#6CB1DB"
             icon={<SiLibreofficemath size={24} fill="green" />}
             />
+            </Link>
 
+             <Link href={"/filters/3"}>
             <Option
             name="Simulados"
             bgColor="#E6E6E6"
             icon={<AiOutlineProfile size={24} fill="black" />}
             />
+            </Link>
 
          </div>
 

@@ -17,9 +17,6 @@ export default function ProvasPage() {
   const campi = ["Coelho Neto"]; // agora é um array
 
   const buscarProvas = () => {
-   //  if (tipo && ano && campus) {
-   //    setMostrarResultados(true);
-   //  }
     window.location.href = `/questions/questionExample`;
   };
 
