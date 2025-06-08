@@ -15,12 +15,12 @@ export default function ProfilePage() {
   const handleLogout = () => {
     localStorage.removeItem('preifma.token');
     localStorage.removeItem('preifma.user');
-    router.push('/');
+    router.push('/login');
   };
 
   useEffect(() => {
     if (!isAuthenticated) {
-      router.push('/');
+      router.push('/login');
     }
   }, [isAuthenticated, router]);
 
