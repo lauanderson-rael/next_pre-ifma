@@ -31,7 +31,7 @@ export function AuthProvider({children}: any){
     useEffect(() => {
         const token = localStorage.getItem('preifma.token');
         const userData = localStorage.getItem('preifma.user');
-        
+
         if (token && userData){
             try {
                 const parsedUser = JSON.parse(userData);
@@ -42,8 +42,8 @@ export function AuthProvider({children}: any){
             }
         }
     }, [])
-     
-    
+
+
     async function signIn({email, password}: SignInData){
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/users/login`, {
@@ -77,7 +77,7 @@ export function AuthProvider({children}: any){
             });
 
             router.push('/home');
-            return 
+            return
 
         } catch (err: any) {
             console.log(err)

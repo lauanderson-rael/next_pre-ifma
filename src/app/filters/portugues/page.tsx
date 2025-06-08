@@ -17,7 +17,7 @@ export default function ProvasPage() {
   const campi = ["Coelho Neto"]; // agora é um array
 
   const buscarProvas = () => {
-    window.location.href = `/questions/questionExample`;
+    window.location.href = `/filters/resolver`;
   };
 
   return (

@@ -73,7 +73,7 @@ export default function CreateQuestionPage() {
   };
 
 
-  
+
   const [questionsList, setQuestionsList] = useState<QuestionType[]>([])
   useEffect(() => {
     async function getQuestions() {
@@ -188,14 +188,15 @@ export default function CreateQuestionPage() {
           <h2 className="text-3xl font-bold mb-6 text-center">Lista de Questoes</h2>
           {questionsList.map((question) => (
             <div key={question.id} className='border rounded mb-2 p-2 m-2'>
-              <h3 className="text-xl font-semibold text-gray-800">{question.title}</h3>
+              <h3 className="text-xl font-semibold text-gray-800">ID: {question.id} - {question.title}</h3>
               <p className="text-gray-600 mb-3">Descrição: {question.description}</p>
 
               <ul>
                 {question.answers.map((answer, i) => (
                   <li key={answer.id}>
-                    {String.fromCharCode(97 + i)}) {answer.text} 
+                    {String.fromCharCode(97 + i)}) {answer.text}
                     <span className='text-green-700'>{answer.correct && '(verdadeira)'}</span>
+                    <span className='text-red-700'>   ID: {answer.id}</span>
                   </li>
                 ))}
               </ul>
@@ -207,4 +208,3 @@ export default function CreateQuestionPage() {
     </div>
   );
 }
-
