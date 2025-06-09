@@ -79,7 +79,6 @@ export default function LoginPage() {
                      type="password"
                      className="w-full p-2 border-b outline-none"
                      placeholder="Digite sua senha"
-                     autocomplete="current-password"
                      value={password}
                      onChange={(e) => {
                         setPassword(e.target.value);
