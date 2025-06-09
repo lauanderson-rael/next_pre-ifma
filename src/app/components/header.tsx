@@ -26,7 +26,7 @@ export default function Header() {
 
         <button
           onClick={() => setShowModal(true)}
-          className="flex justify-between items-center gap-1 bg-white rounded text-black py-1 pl-1 pr-2"
+          className="flex justify-between items-center gap-1 bg-white hover:bg-gray-200 rounded text-black py-1 pl-1 pr-2"
         >
           <BsFire size={18} fill="orange" />
           {user?.current_streak}
@@ -35,7 +35,7 @@ export default function Header() {
 
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-white hover:bg-gray-100 rounded-xl p-6 max-w-sm shadow-lg relative">
+          <div className="bg-white rounded-xl p-6 max-w-sm shadow-lg relative">
             <button
               onClick={() => setShowModal(false)}
               className="absolute top-2 right-3 text-gray-500 text-lg font-bold hover:text-gray-800"
