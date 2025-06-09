@@ -47,7 +47,7 @@ export default function RegisterPage() {
     <main className="flex flex-col min-h-screen items-center gap-4 sm:gap-16 bg-gray-100">
       <div className="bg-green-600 h-[200px] w-screen flex flex-col justify-center items-center">
         <h1 className="text-4xl font-extrabold text-white">PRÉ-IFMA</h1>
-        <div className="text-sm text-gray-200">O seu preparatório para ingressar no IFMA</div>
+        <div className="text-sm text-white">O seu preparatório para ingressar no IFMA</div>
         <Image className="mt-5" src="/logo.png" alt="logo" width={90} height={90} quality={100} />
       </div>
 
