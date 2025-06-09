@@ -8,6 +8,7 @@ import { useContext, useState, useEffect} from "react";
 import { useForm } from 'react-hook-form'
 import { AuthContext } from "../../contexts/AuthContext";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export default function LoginPage() {
    const [email, setEmail] = useState('');
@@ -24,6 +25,7 @@ export default function LoginPage() {
 
       try {
          await signIn(data);
+          toast.success('Login realizado com sucesso!')
       } catch (err) {
          setError('Erro no login. Verifique suas credenciais.');
       } finally {
@@ -84,7 +86,7 @@ export default function LoginPage() {
                      }}
                      required
                   />
-               </div> 
+               </div>
 
                {error && (
                   <div className="bg-red-100 border border-red-400 text-red-700 p-3 rounded text-sm text-center">

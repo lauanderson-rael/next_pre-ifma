@@ -1,31 +1,42 @@
-
-
 'use client';
 
 import { useEffect, useState } from 'react';
 import { FaArrowLeft } from 'react-icons/fa';
 import HeaderTitle from '../../components/headerTitle';
 import TopTitle from '@/app/home/components/topTitle';
-import type { Question, Answer, QuestionResponse} from './types'; // ajuste o caminho conforme onde salvou os tipos
+import type { Question} from './types'; // ajuste o caminho conforme onde salvou os tipos
 import { api } from '@/app/services/api';
+import { useSearchParams } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 export default function QuestaoPage() {
-  const [questions, setQuestions] = useState<Question[]>([]);
-  const [questaoAtual, setQuestaoAtual] = useState(0);
-  const [alternativaSelecionada, setAlternativaSelecionada] = useState('');
+   const searchParams = useSearchParams();
+   const year = searchParams.get('year');
+   const subject = searchParams.get('subject');
+   const type = searchParams.get('type');
 
-  useEffect(() => {
-    const carregarQuestoes = async () => {
-      try {
-        const response = await api.get('/simulates/questions'); // ajuste a rota conforme sua API
-        setQuestions(response.data.questions);
-        console.log(response.data.questions);
-      } catch (error) {
-        console.error('Erro ao buscar questões:', error);
-      }
-    };
-    carregarQuestoes();
-  }, []);
+   const [questions, setQuestions] = useState<Question[]>([]);
+   const [questaoAtual, setQuestaoAtual] = useState(0);
+   const [alternativaSelecionada, setAlternativaSelecionada] = useState('');
+
+   useEffect(() => {
+      const carregarQuestoes = async () => {
+         try {
+         let response;
+         if (subject === "simulado"){
+               response = await api.get('/simulates/questions');
+               setQuestions(response.data.questions.slice(0,10));
+         }else{
+               response = await api.get(`/simulates/questions?q[subject_cont]=${subject}&q[year_eq]=${year}`);
+               setQuestions(response.data.questions);
+               //console.log(`questoes de ${subject} do ano ${year}: \n`, response.data.questions);
+         }
+         } catch (error) {
+         console.error('Erro ao buscar questões:', error);
+         }
+      };
+      carregarQuestoes();
+   }, []);
 
 const questao = questions[questaoAtual];
 
@@ -35,7 +46,6 @@ const responder = async () => {
   const index = alternativaSelecionada.charCodeAt(0) - 97;
   const question = questions[questaoAtual];
   const answerId = question.answers[index]?.id;
-
   if (!answerId) {
     console.error("Alternativa inválida");
     return;
@@ -47,22 +57,29 @@ const responder = async () => {
       answer_id: answerId
     };
 
-    console.log("Enviando:", payload); // debugar apenas
-
+    console.log("Enviando (debug):", payload);
     const response = await api.post('/simulates/answer', payload, {
       headers: {
         'Content-Type': 'application/json',
       }
     });
-
     console.log("Respondido:", response.data);
+    const result = response.data.correct
+    const somAcerto = new Audio('/sounds/success.mp3');
+    const somErro = new Audio('/sounds/error.mp3');
+    if (result) {
+      somAcerto.play();
+      toast.success('Parabéns voce acertou!')
+    } else {
+      somErro.play();
+      toast.error('Que pena, voce errou!');
+    }
+    setTimeout(() => { proxima();}, 2500);
+
   } catch (err) {
     console.error("Erro ao responder:", err);
   }
 };
-
-
-
 
   const anterior = () => {
     if (questaoAtual > 0) {
@@ -78,23 +95,41 @@ const responder = async () => {
     }
   };
 
-  if (!questao) return <p className="text-center text-xl  mt-36 animate-bounce">Carregando questões...</p>;
+  if (!questao){
+   return <div>
+      <p className="text-center text-xl  mt-36 animate-bounce text-green-700 font-bold">Carregando questões...</p>
+   </div>
+  }
+
+
+  let title = ""
+  switch (subject) {
+    case 'matematica':
+      title = "Matemática"
+      break;
+    case 'portugues':
+      title = "Português"
+      break;
+    default:
+      title = "Simulado de 10 questões"
+      break;
+  }
 
   return (
     <div>
       <HeaderTitle
-        href='/questions'
+        href={`/filters?option=${subject}`}
         title={`Questão ${String(questao.id).padStart(3, '0')}`}
         icon={<FaArrowLeft size={20} />}
       />
 
-      <TopTitle title="Pergunta">
-        {questao.title} - {questao.description}
+      <TopTitle title={`${type} - ${year}`}>
+         {title}
       </TopTitle>
 
       <main className="flex flex-col items-center px-4 pt-4">
         <div className="bg-white border border-gray-300 rounded p-4 w-full max-w-xl shadow-sm mb-4">
-          <p className="text-gray-800 font-medium">{questao.description}</p>
+          <p className="text-gray-800 font-medium">{questao.title}</p>
         </div>
 
         <div className="w-full max-w-xl space-y-2">

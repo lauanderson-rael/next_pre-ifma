@@ -7,6 +7,7 @@ type AuthcontextType = {
     isAuthenticated: boolean;
     user: User | null;
     signIn: (data: SignInData) => Promise<void>
+    logout: () => Promise<void>
 }
 
 type User = {
@@ -26,7 +27,7 @@ export function AuthProvider({children}: any){
     const router = useRouter()
     const [user, setUser] = useState<User | null>(null)
 
-    const isAuthenticated = !!user;
+    let isAuthenticated = !!user;
 
     useEffect(() => {
         const token = localStorage.getItem('preifma.token');
@@ -85,8 +86,15 @@ export function AuthProvider({children}: any){
         }
     }
 
+   async function logout (){
+      localStorage.removeItem('preifma.token');
+      localStorage.removeItem('preifma.user');
+      isAuthenticated = false;
+      setUser(null);
+   };
+
     return (
-        <AuthContext.Provider value={{user, signIn, isAuthenticated}}>
+        <AuthContext.Provider value={{user, signIn, isAuthenticated, logout}}>
             {children}
         </AuthContext.Provider>
     )

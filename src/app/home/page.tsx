@@ -42,15 +42,15 @@ export default function Home() {
          <h1 className="text-2xl font-bold mt-2 text-center">O que deseja estudar?</h1>
 
          <div className="mt-4 flex flex-col gap-2">
-            <Link href={"/filters/portugues"}>
+            <Link href={"/filters?option=portugues"}>
             <Option
             name="Português"
             bgColor="#F0BE84"
             icon={<IoBookSharp size={24} fill="blue" />}
             />
             </Link>
-            
-             <Link href={"/filters/matematica"}>
+
+             <Link href={"/filters?option=matematica"}>
             <Option
             name="Matemática"
             bgColor="#6CB1DB"
@@ -58,7 +58,7 @@ export default function Home() {
             />
             </Link>
 
-             <Link href={"/filters/simulado"}>
+             <Link href={"/filters?option=simulado"}>
             <Option
             name="Simulados"
             bgColor="#E6E6E6"
@@ -89,4 +89,3 @@ export default function Home() {
       </div>
    );
 }
-

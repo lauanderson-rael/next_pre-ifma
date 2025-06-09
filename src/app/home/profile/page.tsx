@@ -8,13 +8,11 @@ import { AuthContext } from "@/app/contexts/AuthContext";
 
 export default function ProfilePage() {
   const router = useRouter();
-  const { isAuthenticated, user } = useContext(AuthContext);
-
+  const { isAuthenticated, user,logout } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
 
   const handleLogout = () => {
-    localStorage.removeItem('preifma.token');
-    localStorage.removeItem('preifma.user');
+   logout();
     router.push('/login');
   };
 
@@ -30,8 +28,8 @@ export default function ProfilePage() {
         <TopTitle title="Perfil" />
         <div className="py-4">
           <Image
-            className="mx-auto mb-4 rounded-full"
-            src="/user.png"
+            className="mx-auto mb-4 rounded-full "
+            src={'/user.png'}
             alt="logo"
             width={90}
             height={90}
