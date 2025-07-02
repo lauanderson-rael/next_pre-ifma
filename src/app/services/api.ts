@@ -13,7 +13,7 @@ api.interceptors.request.use((config) => {
     }
   }
 
-  console.log(config);
+  console.log("AXIOS: ", config);
 
   return config;
 });
