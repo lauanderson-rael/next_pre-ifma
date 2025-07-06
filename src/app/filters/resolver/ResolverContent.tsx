@@ -1,21 +1,34 @@
 'use client';
-
-import { useEffect, useState, Suspense } from 'react';
-import { FaArrowLeft } from 'react-icons/fa';
 import HeaderTitle from '../../components/headerTitle';
 import TopTitle from '@/app/home/components/topTitle';
-import type { Question } from './types'; // ajuste o caminho conforme onde salvou os tipos
+import toast from 'react-hot-toast';
+
+import type { Question } from './types';
+import { useEffect, useState, Suspense } from 'react';
+import { FaArrowLeft } from 'react-icons/fa';
 import { api } from '@/app/services/api';
 import { useSearchParams } from 'next/navigation';
-import toast from 'react-hot-toast';
 import { RiAiGenerate2 } from "react-icons/ri";
-import { set } from 'react-hook-form';
 
 export default function ResolverContent() {
+   const [loading, setLoading] = useState(true);
    const searchParams = useSearchParams();
    const year = searchParams.get('year');
    const subject = searchParams.get('subject');
    const type = searchParams.get('type');
+
+   let title = ""
+   switch (subject) {
+      case 'matematica':
+         title = "Matemática"
+         break;
+      case 'portugues':
+         title = "Português"
+         break;
+      default:
+         title = "Simulado de 10 questões"
+         break;
+   }
 
    const [questions, setQuestions] = useState<Question[]>([]);
    const [questaoAtual, setQuestaoAtual] = useState(0);
@@ -23,6 +36,7 @@ export default function ResolverContent() {
 
    const [resposta, setResposta] = useState('');
    const [loadingAi, setLoadingAi] = useState(false);
+
 
    useEffect(() => {
       const carregarQuestoes = async () => {
@@ -37,9 +51,12 @@ export default function ResolverContent() {
             }
          } catch (error) {
             console.error('Erro ao buscar questões:', error);
+         }finally{
+            setLoading(false);
          }
       };
       carregarQuestoes();
+      console.log('quantidade de questoes', questions.length);
    }, []);
 
    const questao = questions[questaoAtual];
@@ -103,29 +120,9 @@ export default function ResolverContent() {
       }
    };
 
-   if (!questao) {
-      return <div>
-         <p className="text-center text-xl  mt-36 animate-bounce text-green-700 font-bold">Carregando questões...</p>
-      </div>
-   }
-
-   let title = ""
-   switch (subject) {
-      case 'matematica':
-         title = "Matemática"
-         break;
-      case 'portugues':
-         title = "Português"
-         break;
-      default:
-         title = "Simulado de 10 questões"
-         break;
-   }
-
    // gemini
    async function geminiSubmit() {
       setLoadingAi(true);
-
       const res = await api.get(`/simulates/questions/${questao.id}`)
       const answers = res.data.answers;
       const correct = answers.find((answer: any) => answer.correct === true);
@@ -157,10 +154,35 @@ export default function ResolverContent() {
    }
    // gemini
 
+if (loading) {
+   return (
+      <div>
+         <p className="text-center text-xl mt-36 animate-bounce text-green-700 font-bold">
+            Carregando questões...
+         </p>
+      </div>
+   );
+}
+
+if (questions.length === 0) {
+   return (
+      <div>
+         <HeaderTitle
+               href={`/filters?option=${subject}`}
+               title='Sem questões :('
+               icon={<FaArrowLeft size={20} />}
+            />
+
+             <p className="text-center text-xl mt-36 text-red-600 font-semibold">
+            Nenhuma questão encontrada para os filtros selecionados.
+         </p>
+      </div>
+   );
+}
+
    return (
 
       <div className="min-h-screen flex flex-col">
-
          {/* Header */}
          <header>
             <HeaderTitle
@@ -174,7 +196,7 @@ export default function ResolverContent() {
          </header>
 
          {/* Main */}
-         <main className="flex-1 px-4 pb-28 mt-3 overflow-y-auto max-h-[60vh]"> {/* Adiciona padding bottom para não cobrir o conteúdo pelo footer */}
+         <main className="flex-1 px-4 pb-28 mt-3 overflow-y-auto max-h-[60vh]">
             <div className="w-full max-w-xl mx-auto">
 
                <div className="bg-white border border-gray-300 rounded p-4 shadow-sm mb-4">
@@ -188,8 +210,8 @@ export default function ResolverContent() {
                         <label
                            key={answer.id}
                            className={`block p-3 border rounded-lg cursor-pointer transition-all ${alternativaSelecionada === letra
-                                 ? 'bg-green-100 border-green-600'
-                                 : 'bg-white border-gray-300 hover:border-green-400'
+                              ? 'bg-green-100 border-green-600'
+                              : 'bg-white border-gray-300 hover:border-green-400'
                               }`}
                         >
                            <input
@@ -226,6 +248,7 @@ export default function ResolverContent() {
 
             </div>
          </main>
+
          {/* Footer fixo */}
          <footer className="fixed bottom-0 w-full left-0 bg-white">
             {/* Botões */}

@@ -4,34 +4,13 @@ import { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { api } from '../services/api';
 import TopTitle from '../home/components/topTitle';
-import { FaArrowLeft } from 'react-icons/fa6';
-
-type FormInputs = {
-  title: string;
-  description: string;
-  year: string;
-  subject: string;
-  answers: string[];
-  correctIndex: number;
-};
-
-type QuestionType = {
-  id: string;
-  title: string;
-  description: string;
-  answers: {
-    id: number;
-    correct: boolean;
-    text: string;
-  }[];
-};
-
+import type  {FormInputsType, QuestionType} from './types.ts'
 
 export default function CreateQuestionPage() {
   const disciplinas = ['Matemática', 'Português'];
   const anos = ['2025', '2024', '2023', '2022', '2021', '2020'];
 
-  const { register, handleSubmit, control, setValue, getValues, watch, reset } = useForm<FormInputs>({
+  const { register, handleSubmit, control, setValue, getValues, watch, reset } = useForm<FormInputsType>({
     defaultValues: {
       title: '',
       description: '',
@@ -39,6 +18,7 @@ export default function CreateQuestionPage() {
       subject: '',
       answers: ['', '', '', ''],
       correctIndex: 0,
+      image: null
     },
   });
 
@@ -46,15 +26,14 @@ export default function CreateQuestionPage() {
   const answers = watch('answers');
   const correctIndex = watch('correctIndex');
 
-  const onSubmit = async (data: FormInputs) => {
+  const onSubmit = async (data: FormInputsType) => {
     const payload = {
       title: data.title,
       description: data.description,
       year: Number(data.year),
       subject: data.subject,
       answers_attributes: data.answers.map((text, i) => ({
-        text,
-        correct: i === Number(data.correctIndex),
+        text, correct: i === Number(data.correctIndex),
       })),
     };
 
@@ -72,18 +51,16 @@ export default function CreateQuestionPage() {
     }
   };
 
-
-
   const [questionsList, setQuestionsList] = useState<QuestionType[]>([])
   useEffect(() => {
     async function getQuestions() {
       await api.get("/simulates/questions")
-        .then((r) => {
-          console.log(Array.isArray(r.data));
-          console.log(r.data)
-          setQuestionsList(r.data.questions)
-          return r.data
-        }).catch((e) => { console.log(e) })
+        .then((res) => {
+          //console.log(Array.isArray(res.data));
+          //console.log(res.data)
+          setQuestionsList(res.data.questions)
+          return res.data
+        }).catch((err) => { console.log(err) })
     }
     getQuestions()
   }, [])
@@ -95,8 +72,7 @@ export default function CreateQuestionPage() {
 
       <main className="flex flex-col items-center max-h-[calc(100dvh-160px)] overflow-y-auto">
 
-
-        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-xl space-y-4 px-4 mt-2">
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-3xl space-y-4 px-4 mt-2">
           <input
             type="text"
             placeholder="Título"
@@ -134,6 +110,13 @@ export default function CreateQuestionPage() {
               </option>
             ))}
           </select>
+
+         <label className="font-medium block mb-1">Imagem (Opcional)</label>
+          <input
+          type="file"
+          className="w-full p-3 border border-green-500 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500"
+          {...register('image', { required: false })}
+          />
 
           <div>
             <label className="font-medium block mb-1">Defina as alternativas</label>

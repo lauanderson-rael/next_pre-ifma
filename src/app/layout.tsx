@@ -19,7 +19,8 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "Pré-IFMA",
   description: "O seu preparatório para ingressar no IFMA",
-};
+  keywords: ['preifma', 'preparatorio pre-ifma', 'preparatorio ifma', 'pre-ifma']
+}
 
 export default function RootLayout({
   children,

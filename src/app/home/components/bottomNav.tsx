@@ -16,7 +16,7 @@ export default function BottomNav() {
    ];
 
    return (
-      <div className="w-screen flex justify-center md:hidden">
+      <div className="w-screen flex justify-center md:hidden    bg-white h-20 fixed bottom-0">
 
          <nav className="fixed bottom-0 w-[92%] bg-green-600 z-50 mb-3 rounded">
             <div className="flex justify-around items-center h-16">
