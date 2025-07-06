@@ -1,5 +1,4 @@
 'use client';
-
 import { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { api } from '../services/api';
@@ -7,8 +6,7 @@ import TopTitle from '../home/components/topTitle';
 import type  {FormInputsType, QuestionType} from './types.ts'
 
 export default function CreateQuestionPage() {
-  const disciplinas = ['Matemática', 'Português'];
-  const anos = ['2025', '2024', '2023', '2022', '2021', '2020'];
+  const anos = ['2025', '2024', '2023', '2022'];
 
   const { register, handleSubmit, control, setValue, getValues, watch, reset } = useForm<FormInputsType>({
     defaultValues: {
@@ -16,7 +14,7 @@ export default function CreateQuestionPage() {
       description: '',
       year: '',
       subject: '',
-      answers: ['', '', '', ''],
+      answers: ['', '', '', '', ''],
       correctIndex: 0,
       image: null
     },
@@ -26,37 +24,48 @@ export default function CreateQuestionPage() {
   const answers = watch('answers');
   const correctIndex = watch('correctIndex');
 
-  const onSubmit = async (data: FormInputsType) => {
-    const payload = {
-      title: data.title,
-      description: data.description,
-      year: Number(data.year),
-      subject: data.subject,
-      answers_attributes: data.answers.map((text, i) => ({
-        text, correct: i === Number(data.correctIndex),
-      })),
-    };
+const onSubmit = async (data: FormInputsType) => {
+  const formData = new FormData();
 
-    try {
-      const res = await api.post('/questions/create', payload);
-      if (res) {
-        setStatus('Questão criada com sucesso!');
-        reset();
-      } else {
-        setStatus('Erro ao criar a questão.');
-      }
-    } catch (err) {
-      console.error(err);
-      setStatus('Erro de rede.');
+  formData.append('title', data.title);
+  formData.append('description', data.description);
+  formData.append('year', data.year);
+  formData.append('subject', data.subject);
+
+  if (data.image && data.image[0]) {
+    formData.append('image', data.image[0]);
+  }
+
+  // Adicionar respostas
+  data.answers.forEach((text, i) => {
+    formData.append(`answers_attributes[${i}][text]`, text);
+    formData.append(`answers_attributes[${i}][correct]`, String(i === Number(data.correctIndex)));
+  });
+
+  try {
+    const res = await api.post('/questions/create', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    if (res) {
+      setStatus('Questão criada com sucesso!');
+      reset();
+    } else {
+      setStatus('Erro ao criar a questão.');
     }
-  };
+  } catch (err) {
+    console.error(err);
+    setStatus('Erro de rede.');
+  }
+};
 
   const [questionsList, setQuestionsList] = useState<QuestionType[]>([])
   useEffect(() => {
     async function getQuestions() {
       await api.get("/simulates/questions")
         .then((res) => {
-          //console.log(Array.isArray(res.data));
           //console.log(res.data)
           setQuestionsList(res.data.questions)
           return res.data
@@ -104,18 +113,15 @@ export default function CreateQuestionPage() {
             className="w-full p-3 border border-green-500 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
           >
             <option value="">Selecione a disciplina...</option>
-            {disciplinas.map((dis) => (
-              <option key={dis} value={dis}>
-                {dis}
-              </option>
-            ))}
+            <option value="matematica">Matemática</option>
+            <option value="portugues">Português</option>
           </select>
 
          <label className="font-medium block mb-1">Imagem (Opcional)</label>
           <input
-          type="file"
-          className="w-full p-3 border border-green-500 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500"
-          {...register('image', { required: false })}
+            type="file"
+            className="w-full p-3 border border-green-500 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500"
+            {...register('image', { required: false })}
           />
 
           <div>
@@ -155,7 +161,7 @@ export default function CreateQuestionPage() {
 
         {status && (
           <div className="fixed inset-0 flex items-center justify-center z-50">
-            <div className="bg-green-300 mx-4 p-6 rounded-lg shadow-lg text-center max-w-sm w-full">
+            <div className="bg-green-100 mx-4 p-6 rounded-lg shadow-lg text-center max-w-sm w-full border border-green-400">
               <p className="text-gray-800 text-lg mb-4">{status}</p>
               <button
                 onClick={() => setStatus(null)}

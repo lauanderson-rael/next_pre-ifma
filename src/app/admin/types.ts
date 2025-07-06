@@ -6,7 +6,7 @@ export interface FormInputsType {
   subject: string;
   answers: string[];
   correctIndex: number;
-  image?: File | null;
+  image?: FileList | null;
 };
 
 export interface QuestionType {

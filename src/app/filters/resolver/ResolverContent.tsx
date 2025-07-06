@@ -50,7 +50,7 @@ export default function ResolverContent() {
                setQuestions(response.data.questions);
             }
          } catch (error) {
-            console.error('Erro ao buscar questões:', error);
+            console.log('Erro ao buscar questões:', error);
          }finally{
             setLoading(false);
          }
@@ -130,9 +130,6 @@ export default function ResolverContent() {
          .filter((answer: any) => answer.correct !== true)
          .map((answer: any) => answer.text);
 
-      console.log("corrreto:", correct.text);
-      console.log("incorrreto:", incorrects);
-
       try {
          const response = await fetch('/api/gemini', {
             method: 'POST',
@@ -157,6 +154,11 @@ export default function ResolverContent() {
 if (loading) {
    return (
       <div>
+          <HeaderTitle
+               href={`/filters?option=${subject}`}
+               title='Aguarde...'
+               icon={<FaArrowLeft size={20} />}
+         />
          <p className="text-center text-xl mt-36 animate-bounce text-green-700 font-bold">
             Carregando questões...
          </p>
@@ -171,9 +173,9 @@ if (questions.length === 0) {
                href={`/filters?option=${subject}`}
                title='Sem questões :('
                icon={<FaArrowLeft size={20} />}
-            />
+         />
 
-             <p className="text-center text-xl mt-36 text-red-600 font-semibold">
+         <p className="text-center text-xl mt-36 text-red-600 font-semibold">
             Nenhuma questão encontrada para os filtros selecionados.
          </p>
       </div>

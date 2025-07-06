@@ -8,7 +8,7 @@ import TopTitle from "../home/components/topTitle";
 export default function FiltroContent() {
   const searchParams = useSearchParams();
   const option = searchParams.get('option');
-  
+
   let title = "";
   switch (option) {
     case 'matematica':
@@ -26,7 +26,7 @@ export default function FiltroContent() {
   const [campus, setCampus] = useState("");
 
   const tipos = ["Integrado", "Subsequente", "Concomitante"];
-  const anos = ["2024", "2023", "2022", "2021", "2020"];
+  const anos = ["2025", "2024", "2023", "2022"];
   const campi = ["Coelho Neto"];
 
   const buscarProvas = () => {
