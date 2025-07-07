@@ -9,6 +9,7 @@ import { FaArrowLeft } from 'react-icons/fa';
 import { api } from '@/app/services/api';
 import { useSearchParams } from 'next/navigation';
 import { RiAiGenerate2 } from "react-icons/ri";
+import Image from 'next/image';
 
 export default function ResolverContent() {
    const [loading, setLoading] = useState(true);
@@ -44,6 +45,7 @@ export default function ResolverContent() {
             let response;
             if (subject === "simulado") {
                response = await api.get('/simulates/questions');
+               console.log("Todas as questoes",response.data.questions);
                setQuestions(response.data.questions.slice(0, 10));
             } else {
                response = await api.get(`/simulates/questions?q[subject_cont]=${subject}&q[year_eq]=${year}`);
@@ -199,11 +201,17 @@ if (questions.length === 0) {
 
          {/* Main */}
          <main className="flex-1 px-4 pb-28 mt-3 overflow-y-auto max-h-[60vh]">
-            <div className="w-full max-w-xl mx-auto">
+            <div className="w-full max-w-3xl mx-auto">
 
                <div className="bg-white border border-gray-300 rounded p-4 shadow-sm mb-4">
                   <p className="text-gray-800 font-medium">{questao.title}</p>
                </div>
+
+              {questao.image_urls?.map((url, index) => (
+                  <div key={index} className="mb-4">
+                     <img src={url} alt={`Imagem ${index}`} className="w-full rounded" />
+                  </div>
+              ))}
 
                <div className="space-y-3">
                   {questao.answers.map((answer, index) => {
@@ -254,7 +262,7 @@ if (questions.length === 0) {
          {/* Footer fixo */}
          <footer className="fixed bottom-0 w-full left-0 bg-white">
             {/* Botões */}
-            <div className="pt-6 space-y-2 max-w-xl mx-auto px-4 sm:px-0">
+            <div className="pt-6 space-y-2 max-w-3xl mx-auto px-4 sm:px-0">
                <button
                   onClick={geminiSubmit}
                   className="flex justify-center gap-2 items-center w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-lg font-bold shadow"
@@ -270,7 +278,7 @@ if (questions.length === 0) {
                </button>
             </div>
 
-            <div className='flex justify-between items-center max-w-xl mx-auto m-4 px-4 sm:px-0'>
+            <div className='flex justify-between items-center max-w-3xl mx-auto m-4 px-4 sm:px-0'>
                <button
                   onClick={anterior}
                   disabled={questaoAtual === 0}
@@ -289,7 +297,6 @@ if (questions.length === 0) {
             </div>
          </footer>
       </div>
-
 
    );
 }

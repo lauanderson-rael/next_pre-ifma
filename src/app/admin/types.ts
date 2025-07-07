@@ -6,13 +6,16 @@ export interface FormInputsType {
   subject: string;
   answers: string[];
   correctIndex: number;
-  image?: FileList | null;
+  images?: FileList | null;
 };
 
 export interface QuestionType {
   id: string;
   title: string;
   description: string;
+  year: string;
+  subject: string;
+  image_urls?: string[];
   answers: {
     id: number;
     correct: boolean;

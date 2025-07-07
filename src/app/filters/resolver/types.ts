@@ -9,6 +9,7 @@ export interface Question {
   title: string;
   description: string;
   answers: Answer[];
+  image_urls?: string[];
 }
 
 export interface QuestionResponse {
