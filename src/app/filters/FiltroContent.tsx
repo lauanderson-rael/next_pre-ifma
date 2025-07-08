@@ -47,7 +47,7 @@ export default function FiltroContent() {
     <>
       <TopTitle title={title} />
       <main className="flex flex-col items-center gap-4 max-h-[calc(100dvh-160px)] overflow-y-auto">
-        <section className="w-full max-w-xl space-y-2 px-4 mt-2">
+        <section className="w-full max-w-3xl space-y-2 px-4 mt-2">
           <div>
             <label className="block mb-2 text-gray-700 font-medium">Tipo de prova</label>
             <select

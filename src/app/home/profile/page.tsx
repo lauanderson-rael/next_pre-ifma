@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "@/app/contexts/AuthContext";
 import { api } from "@/app/services/api";
+import { Mail } from "lucide-react";
 
 interface UserAnswer {
    id: number;
@@ -68,15 +69,25 @@ export default function ProfilePage() {
                   height={90}
                   quality={100}
                />
-               <div className="mt-4 text-lg font-semibold">
-                  XP: <span className="text-green-600">{pontos}</span> pontos
+
+               <div className="mt-4 text-center">
+                  <h2 className="text-xl font-semibold text-gray-800">{user?.name || 'Carregando...'}</h2>
+                  <p className="text-gray-600 flex items-center gap-1 justify-center mt-1">
+                     <Mail className="w-4 h-4" />
+                     {user?.email || 'Carregando...'}
+                  </p>
                </div>
-               <div><b>Nome:</b> {user?.name || 'carregando'}</div>
-               <div><b>Email:</b> {user?.email || 'carregando'}</div>
-               <div><b>Total de respostas:</b> {answers.length}</div>
-               <div><b>Respostas corretas:</b> {corretas}</div>
-               <div><b>Respostas incorretas:</b> {incorretas}</div>
-               <div><b>Taxa de acerto:</b> {taxaAcerto}%</div>
+
+               <div className="text-center mt-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-2 rounded-full shadow-lg">
+                  <span className="font-bold text-lg">{pontos} XP</span>
+               </div >
+               <div className="text-center mt-4 text-gray-600">
+
+                  <div><b>Total de respostas:</b> {answers.length}</div>
+                  <div><b>Respostas corretas:</b> {corretas}</div>
+                  <div><b>Respostas incorretas:</b> {incorretas}</div>
+                  <div><b>Taxa de acerto:</b> {taxaAcerto}%</div>
+               </div>
             </div>
          </main>
 
@@ -162,10 +173,6 @@ export default function ProfilePage() {
                </div>
             </div>
          )}
-
-         {/* novo */}
-
-         {/* novo */}
       </div>
    );
 }

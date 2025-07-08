@@ -9,7 +9,6 @@ import { FaArrowLeft } from 'react-icons/fa';
 import { api } from '@/app/services/api';
 import { useSearchParams } from 'next/navigation';
 import { RiAiGenerate2 } from "react-icons/ri";
-import Image from 'next/image';
 
 export default function ResolverContent() {
    const [loading, setLoading] = useState(true);
@@ -35,9 +34,9 @@ export default function ResolverContent() {
    const [questaoAtual, setQuestaoAtual] = useState(0);
    const [alternativaSelecionada, setAlternativaSelecionada] = useState('');
 
-   const [resposta, setResposta] = useState('');
+   const [responseAi, setResponseAi] = useState('');
    const [loadingAi, setLoadingAi] = useState(false);
-
+   const [showAi, setShowAi] = useState(false);
 
    useEffect(() => {
       const carregarQuestoes = async () => {
@@ -88,7 +87,6 @@ export default function ResolverContent() {
          });
          console.log("Respondido:", response.data);
          const result = response.data.correct
-         console.log("resultado: ", result);
          const somAcerto = new Audio('/sounds/success.mp3');
          const somErro = new Audio('/sounds/error.mp3');
          if (result) {
@@ -102,6 +100,8 @@ export default function ResolverContent() {
 
       } catch (err) {
          console.error("Erro ao responder:", err);
+      }finally{
+         setShowAi(true);
       }
    };
 
@@ -109,7 +109,7 @@ export default function ResolverContent() {
       if (questaoAtual > 0) {
          setQuestaoAtual(questaoAtual - 1);
          setAlternativaSelecionada('');
-         setResposta('');
+         setResponseAi('');
       }
    };
 
@@ -117,13 +117,14 @@ export default function ResolverContent() {
       if (questaoAtual < questions.length - 1) {
          setQuestaoAtual(questaoAtual + 1);
          setAlternativaSelecionada('');
-         setResposta('');
+         setResponseAi('');
          setLoadingAi(false);
       }
    };
 
    // gemini
    async function geminiSubmit() {
+      setShowAi(false);
       setLoadingAi(true);
       const res = await api.get(`/simulates/questions/${questao.id}`)
       const answers = res.data.answers;
@@ -144,7 +145,7 @@ export default function ResolverContent() {
          const data = await response.json();
 
          if (!response.ok) throw new Error(data.message || 'Erro desconhecido');
-         setResposta(data.text)
+         setResponseAi(data.text)
          setLoadingAi(false);
          console.log(data.text);
       } catch (err) {
@@ -237,12 +238,12 @@ if (questions.length === 0) {
                      );
                   })}
 
-                  {resposta && (
+                  {responseAi && (
                      <div className="mt-6 p-4 rounded bg-indigo-100 whitespace-pre-wrap">
                         <h3 className="flex justify-center gap-2 items-center text-xl font-bold text-indigo-600">
                            Explicação com <RiAiGenerate2 size={20} />
                         </h3>
-                        {resposta}
+                        {responseAi}
                      </div>
                   )}
 
@@ -255,7 +256,6 @@ if (questions.length === 0) {
                   )}
                </div>
 
-
             </div>
          </main>
 
@@ -263,9 +263,11 @@ if (questions.length === 0) {
          <footer className="fixed bottom-0 w-full left-0 bg-white">
             {/* Botões */}
             <div className="pt-6 space-y-2 max-w-3xl mx-auto px-4 sm:px-0">
+
                <button
-                  onClick={geminiSubmit}
-                  className="flex justify-center gap-2 items-center w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-lg font-bold shadow"
+                  onClick={()=> {showAi && geminiSubmit()}}
+                  disabled={!showAi}
+                  className="flex justify-center gap-2 items-center w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-lg font-bold shadow  disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-500"
                >
                   Ver explicação com IA <RiAiGenerate2 size={20} />
                </button>
@@ -282,7 +284,7 @@ if (questions.length === 0) {
                <button
                   onClick={anterior}
                   disabled={questaoAtual === 0}
-                  className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded disabled:opacity-50"
+                  className="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded disabled:opacity-60"
                >
                   Anterior
                </button>
@@ -290,7 +292,7 @@ if (questions.length === 0) {
                <button
                   onClick={proxima}
                   disabled={questaoAtual === questions.length - 1}
-                  className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded disabled:opacity-50"
+                  className="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded disabled:opacity-60"
                >
                   Próxima
                </button>
