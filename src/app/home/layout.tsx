@@ -12,7 +12,7 @@ export default function DashboardLayout({ children, }: { children: React.ReactNo
 
          <main className="md:flex">
             <Sidebar />
-            <div className=" md:w-[100%] ">
+            <div className=" md:w-[100%]">
                {children}
             </div>
          </main>

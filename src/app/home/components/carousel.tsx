@@ -70,7 +70,7 @@ const Carousel: React.FC<CarouselProps> = ({
 
   return (
     <div
-      className={`relative w-full ${className}`}
+      className={`relative w-full md:w-[90%] mx-auto ${className}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
