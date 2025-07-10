@@ -196,7 +196,7 @@ if (questions.length === 0) {
                icon={<FaArrowLeft size={20} />}
             />
             <TopTitle title={`${type} - ${year}`}>
-               {title}
+               ({title})
             </TopTitle>
          </header>
 
