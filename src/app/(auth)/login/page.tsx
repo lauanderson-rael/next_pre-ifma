@@ -107,6 +107,10 @@ export default function LoginPage() {
                <span>Ainda não possui uma conta? </span>
                <Link href="/register" className="text-black underline">Cadastre-se</Link>
             </div>
+            <div className="mt-2 text-center text-[14px]">
+
+               <Link href="/forgot-password" className="text-black underline">Esqueceu-se da senha</Link>
+            </div>
          </div>
 
       </main>
