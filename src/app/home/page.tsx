@@ -49,14 +49,13 @@ export default function Home() {
          </div> */}
 
          <div className="mt-2">
-
-         {<Carousel images={['/banner1.png', '/banner2.png']} /> }
+            {<Carousel images={['/banner1.png', '/banner2.png']} /> }
          </div>
 
          <h1 className="text-2xl font-bold mt-2 text-center">O que deseja estudar?</h1>
 
-         <div className="mt-4 flex flex-col gap-2">
-            <Link href={"/filters?option=portugues"}>
+         <div className="mt-4 flex flex-col gap-2 md:gap-4 md:flex-row md:justify-around">
+            <Link href={"/filters?option=portugues"} className="md:w-full">
                <Option
                   name="Português"
                   bgColor="#F0BE84"
@@ -64,7 +63,7 @@ export default function Home() {
                />
             </Link>
 
-            <Link href={"/filters?option=matematica"}>
+            <Link href={"/filters?option=matematica"} className="md:w-full">
                <Option
                   name="Matemática"
                   bgColor="#6CB1DB"
@@ -72,7 +71,7 @@ export default function Home() {
                />
             </Link>
 
-            <Link href={"/filters?option=simulado"}>
+            <Link href={"/filters?option=simulado"} className="md:w-full">
                <Option
                   name="Simulados"
                   bgColor="#E6E6E6"
