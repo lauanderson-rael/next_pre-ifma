@@ -1,14 +1,31 @@
 
 'use client'
 
+// import { AuthContext } from "../contexts/AuthContext";
 import { BsFire } from "react-icons/bs";
-import { useContext, useState } from "react";
-import { AuthContext } from "../contexts/AuthContext";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import { api } from "../services/api";
+
+type UserDataType = {
+   name: string;
+   current_streak: number;
+};
+
 
 export default function Header() {
-  const { user } = useContext(AuthContext);
+//   const { user } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
+
+  const [dataUser, setDataUser] = useState<UserDataType | null>(null);
+     const [loading, setLoading] = useState(true);
+
+     useEffect(() => {
+        api.get("/users/data")
+           .then((res) => setDataUser(res.data))
+           .catch((err) => console.error(err))
+           .finally(() => setLoading(false));
+     }, []);
 
   return (
     <>
@@ -17,8 +34,8 @@ export default function Header() {
           <Link href="/home/profile">
             <img className="w-9 h-9 rounded-full hover:opacity-80" src="/user.png" alt="Usuário" />
           </Link>
-          {user ? (
-            <div>Olá, {user.name || 'Nome não informado'}</div>
+          {dataUser ? (
+            <div>Olá, {dataUser.name || 'Nome não informado'}</div>
           ) : (
             <p>Carregando...</p>
           )}
@@ -29,7 +46,7 @@ export default function Header() {
           className="flex justify-between items-center gap-1 bg-white hover:opacity-80 rounded text-black py-1 pl-1 pr-2"
         >
           <BsFire size={18} fill="orange" />
-          {user?.current_streak}
+          {dataUser?.current_streak}
         </button>
       </header>
 
@@ -42,7 +59,7 @@ export default function Header() {
             >
               ×
             </button>
-            <h2 className="text-xl font-bold mb-2">O que é uma sequência (🔥)?</h2>
+            <h2 className="text-xl font-bold mb-2">O que é uma sequência 🔥?</h2>
             <p className="text-gray-700">
               Uma sequência representa os dias consecutivos em que você estuda sem interrupções.
               Mantenha sua sequência ativa praticando todos os dias!

@@ -39,15 +39,6 @@ export default function Home() {
    return (
       <div className="mx-auto px-3 md:px-[250px] h-[calc(100vh-60px)] overflow-y-auto">
 
-         {/* <div className="w-full mt-2 bg-gray-200 relative flex items-center justify-center">
-            <img
-               src='/banner1.png'
-               alt='image'
-               className="object-contain w-full h-full bg-white"
-               draggable={false}
-            />
-         </div> */}
-
          <div className="mt-2">
             {<Carousel images={['/banner1.png', '/banner2.png']} /> }
          </div>
