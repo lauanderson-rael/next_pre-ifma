@@ -189,7 +189,7 @@ if (questions.length === 0) {
 
       <div className="min-h-screen flex flex-col">
          {/* Header */}
-         <header>
+         <header className="sticky top-0 z-50">
             <HeaderTitle
                href={`/filters?option=${subject}`}
                title={`Questão ${String(questao.id).padStart(3, '0')}`}
