@@ -9,7 +9,7 @@ import { FaCheckCircle } from "react-icons/fa";
 import { RiNumbersFill } from "react-icons/ri";
 import Link from "next/link";
 import { api } from "../services/api";
-//import Carousel from "./components/carousel";
+import Carousel from "./components/carousel";
 
 type UserDataType = {
    email: string;
@@ -37,17 +37,21 @@ export default function Home() {
    </p>;
 
    return (
-      <div className="mx-auto px-3  md:px-[300px]">
+      <div className="mx-auto px-3 md:px-[250px] h-[calc(100vh-60px)] overflow-y-auto">
 
-         <div className="w-full mt-2 bg-gray-200 relative flex items-center justify-center">
+         {/* <div className="w-full mt-2 bg-gray-200 relative flex items-center justify-center">
             <img
                src='/banner1.png'
                alt='image'
                className="object-contain w-full h-full bg-white"
                draggable={false}
             />
+         </div> */}
+
+         <div className="mt-2">
+
+         {<Carousel images={['/banner1.png', '/banner2.png']} /> }
          </div>
-         {/* <Carousel images={['/banner1.png', '/banner2.png']} /> */}
 
          <h1 className="text-2xl font-bold mt-2 text-center">O que deseja estudar?</h1>
 
@@ -80,7 +84,7 @@ export default function Home() {
 
          <p className="text-xl font-bold text-center text-gray-600 mt-5 mb-2.5 ">Estatísticas</p>
 
-         <div className="flex gap-2 mt-4 mb-32 sm:mb-0">
+         <div className="flex gap-2 mt-4 mb-32 sm:mb-20">
             <CardInfo
                title="Questões Resolvidas"
                bgColor="#369FFF"

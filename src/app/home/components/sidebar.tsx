@@ -4,7 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { IoHome } from "react-icons/io5";
 import { AiOutlineProfile } from "react-icons/ai";
-import { FaUserCog } from "react-icons/fa";
+import { FaUserCog,  } from "react-icons/fa";
+import { FaRankingStar } from "react-icons/fa6";
 
 export default function Sidebar() {
    const pathname = usePathname();
@@ -12,11 +13,12 @@ export default function Sidebar() {
    const menu = [
       { href: "/home", icon: <IoHome size={22} />, texto: "Início" },
       { href: "/home/provas", icon: <AiOutlineProfile size={22} />, texto: "Provas" },
+      { href: "/home/ranking", icon: <FaRankingStar size={22} />, texto: "Ranking" },
       { href: "/home/profile", icon: <FaUserCog size={22} />, texto: "Perfil" },
    ];
 
    return (
-      <aside className="hidden md:flex flex-col w-52 h-[calc(100vh-80px)] bg-green-800 text-white p-4 shadow-lg ">
+      <aside className="hidden md:flex flex-col w-52 h-[calc(100vh-60px)] bg-green-800 text-white p-4 shadow-lg ">
          <h2 className="text-xl font-bold mb-6">Menu</h2>
 
          <nav className="flex flex-col gap-3">

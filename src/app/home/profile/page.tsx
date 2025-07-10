@@ -78,9 +78,10 @@ export default function ProfilePage() {
                   </p>
                </div>
 
-               <div className="text-center mt-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-2 rounded-full shadow-lg">
+               <div className="text-center mt-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-2 rounded shadow-lg">
                   <span className="font-bold text-lg">{pontos} XP</span>
                </div >
+
                <div className="text-center mt-4 text-gray-600">
 
                   <div><b>Total de respostas:</b> {answers.length}</div>
@@ -94,7 +95,7 @@ export default function ProfilePage() {
          {/* novo */}
          <button
             onClick={() => setShowAnswersModal(true)}
-            className=" flex justify-center items-center  mt-4 bg-green-600 hover:bg-green-700 text-white px-4 py-3 m-4 rounded sm:mx-auto "
+            className="sm:w-50 flex justify-center items-center bg-green-600 hover:bg-green-700 text-white py-3 m-4 px-4 rounded sm:mx-auto "
          >
             Ver últimas respostas
          </button>
@@ -138,11 +139,12 @@ export default function ProfilePage() {
 
          <button
             onClick={() => setShowModal(true)}
-            className="sm:mx-auto flex justify-center items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold mx-4 py-3 px-4 rounded"
+            className="sm:mx-auto sm:w-50  flex justify-center items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold mx-4 py-3 px-4  rounded  "
          >
             Logout
             <FiLogOut />
          </button>
+
 
          {/* Modal de confirmação */}
          {showModal && (

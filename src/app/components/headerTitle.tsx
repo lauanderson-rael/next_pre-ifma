@@ -10,7 +10,7 @@ interface Props {
 
 export default function HeaderTitle({title, icon, href}: Props){
    return(
-      <header className=" bg-green-600 h-[80px] w-screen flex justify-between items-center text-white px-10 ">
+      <header className=" bg-green-600 h-[60px] w-screen flex justify-between items-center text-white px-10 ">
 
          <Link href={href} className="">
             {icon}

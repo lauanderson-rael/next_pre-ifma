@@ -70,12 +70,12 @@ const Carousel: React.FC<CarouselProps> = ({
 
   return (
     <div
-      className={`relative w-full md:w-[90%] mx-auto ${className}`}
+      className={`relative w-full md:w-[100%]${className}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       {/* Main carousel container */}
-      <div className="relative overflow-hidden rounded-lg shadow-lg bg-green-800 mt-2">
+      <div className="relative overflow-hidden rounded-lg shadow-lg bg-green-800">
         {/* Slides container */}
         <div
           className="flex transition-transform duration-300 ease-in-out"

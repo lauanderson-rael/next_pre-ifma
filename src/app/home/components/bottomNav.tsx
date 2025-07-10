@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { IoHome} from "react-icons/io5";
 import { AiOutlineProfile } from "react-icons/ai";
 import { FaUserCog } from "react-icons/fa";
+import { FaRankingStar } from "react-icons/fa6";
 
 export default function BottomNav() {
    const pathname = usePathname();
@@ -12,6 +13,7 @@ export default function BottomNav() {
    const navItems = [
       { href: "/home", icon: <IoHome size={24} />, label: "Início" },
       { href: "/home/provas", icon: <AiOutlineProfile size={24} />, label: "Provas" },
+      { href: "/home/ranking", icon: <FaRankingStar size={24} />, label: "Ranking" },
       { href: "/home/profile", icon: <FaUserCog size={24} />, label: "Perfil" },
    ];
 

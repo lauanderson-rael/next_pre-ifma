@@ -12,10 +12,10 @@ export default function Header() {
 
   return (
     <>
-      <header className="bg-green-600 h-[80px] w-screen flex justify-between items-center text-white px-4">
+      <header className="bg-green-600 h-[60px] w-full flex justify-between items-center text-white px-4">
         <div className="flex gap-2">
           <Link href="/home/profile">
-            <img className="w-9 h-9 rounded-full" src="/user.png" alt="Usuário" />
+            <img className="w-9 h-9 rounded-full hover:opacity-80" src="/user.png" alt="Usuário" />
           </Link>
           {user ? (
             <div className="text-xl">Olá, {user.name || 'Nome não informado'}</div>
@@ -26,7 +26,7 @@ export default function Header() {
 
         <button
           onClick={() => setShowModal(true)}
-          className="flex justify-between items-center gap-1 bg-white hover:bg-gray-200 rounded text-black py-1 pl-1 pr-2"
+          className="flex justify-between items-center gap-1 bg-white hover:opacity-80 rounded text-black py-1 pl-1 pr-2"
         >
           <BsFire size={18} fill="orange" />
           {user?.current_streak}
