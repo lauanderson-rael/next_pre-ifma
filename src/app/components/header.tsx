@@ -12,7 +12,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="sticky top-0 bg-green-600 h-[60px] w-full flex justify-between items-center text-white px-4">
+      <header className="sticky top-0 z-99 bg-green-600 h-[60px] w-full flex justify-between items-center text-white px-4">
         <div className="flex gap-2 justify-center items-center">
           <Link href="/home/profile">
             <img className="w-9 h-9 rounded-full hover:opacity-80" src="/user.png" alt="Usuário" />
