@@ -74,7 +74,7 @@ export default function Home() {
 
          <p className="text-xl font-bold text-center text-gray-600 mt-5 mb-2.5 ">Estatísticas</p>
 
-         <div className="flex gap-2 mt-4 mb-32 sm:mb-20">
+         <div className="flex gap-2 mt-4 mb-32 md:mb-0">
             <CardInfo
                title="Questões Resolvidas"
                bgColor="#369FFF"
