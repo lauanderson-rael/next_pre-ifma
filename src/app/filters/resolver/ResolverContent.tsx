@@ -110,6 +110,7 @@ export default function ResolverContent() {
          setQuestaoAtual(questaoAtual - 1);
          setAlternativaSelecionada('');
          setResponseAi('');
+         setShowAi(false);
       }
    };
 
@@ -119,6 +120,7 @@ export default function ResolverContent() {
          setAlternativaSelecionada('');
          setResponseAi('');
          setLoadingAi(false);
+         setShowAi(false);
       }
    };
 
