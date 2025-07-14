@@ -34,7 +34,7 @@ export default function CreateQuestionPage() {
 
       if (data.images && data.images.length > 0) {
          for (let i = 0; i < data.images.length; i++) {
-            formData.append('image', data.images[i]);
+            formData.append('images[]', data.images[i]);
          }
       }
       // Adicionando respostas
