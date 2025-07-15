@@ -5,7 +5,7 @@ export default function AdminPage() {
   return (
     <main className=" flex flex-col items-center justify-center px-4 mt-10">
       <h1 className="text-3xl font-bold text-black mb-10 text-center">
-        Bem vindo ao Painel Administrativo
+        Bem-vindo ao Painel Administrativo
       </h1>
 
       <div className="grid gap-6 w-full max-w-md">
