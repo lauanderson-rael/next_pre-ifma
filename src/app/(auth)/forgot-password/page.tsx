@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { api } from "../../services/api";
+import Image from "next/image";
 
 export default function ForgotPasswordPage() {
    const [loading, setLoading] = useState(false);
@@ -18,7 +19,7 @@ export default function ForgotPasswordPage() {
       setError('');
 
       try {
-         await api.post('/password_resets/create', {
+         await api.post('/password_resets', {
             email: data.email,
          });
 
@@ -35,7 +36,9 @@ export default function ForgotPasswordPage() {
       <main className="flex flex-col min-h-screen items-center gap-4 sm:gap-16 bg-gray-100">
          <div className="bg-green-600 h-[200px] w-screen flex flex-col justify-center items-center">
             <h1 className="text-4xl font-extrabold text-white">PRÉ-IFMA</h1>
-            {/* <p className="text-sm text-white">Redefina sua senha abaixo</p> */}
+
+             <div className="text-sm text-white">O seu preparatório para ingressar no IFMA</div>
+                        <Image className="mt-5" src="/logo.png" alt="logo" width={90} height={90} quality={100} priority />
          </div>
 
          <div className="w-full max-w-md sm:bg-white p-6 sm:rounded-lg sm:shadow-md">

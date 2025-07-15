@@ -14,7 +14,7 @@ export default function CreateQuestionPage() {
          description: '',
          year: '',
          subject: '',
-         answers: ['', '', '', '', ''],
+         answers: ['', '', '', ''],
          correctIndex: 0,
          images: null
       },
@@ -134,31 +134,57 @@ export default function CreateQuestionPage() {
                />
 
                <div>
-                  <label className="font-medium block mb-1">Defina as alternativas</label>
-                  {answers.map((ans, i) => (
-                     <div key={i} className="flex items-center mb-2 gap-3">
-                        <input
-                           type="radio"
-                           value={i}
-                           checked={Number(correctIndex) === i}
-                           onChange={() => setValue('correctIndex', i)}
-                           className="w-5 h-5 accent-green-600 focus:ring-green-400 focus:outline-none"
-                        />
-                        <Controller
-                           control={control}
-                           name={`answers.${i}`}
-                           render={({ field }) => (
-                              <input
-                                 {...field}
-                                 placeholder={`Alternativa ${String.fromCharCode(65 + i)}`}
-                                 className="w-full p-3 border border-green-500 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500"
+  <label className="font-medium block mb-1">Defina as alternativas</label>
+  {answers.map((ans, i) => (
+    <div key={i} className="flex items-center mb-2 gap-3">
+      <input
+        type="radio"
+        value={i}
+        checked={Number(correctIndex) === i}
+        onChange={() => setValue('correctIndex', i)}
+        className="w-5 h-5 accent-green-600 focus:ring-green-400 focus:outline-none"
+      />
+      <input
+        type="text"
+        value={ans}
+        onChange={(e) => {
+          const newAnswers = [...answers];
+          newAnswers[i] = e.target.value;
+          setValue('answers', newAnswers);
+        }}
+        placeholder={`Alternativa ${String.fromCharCode(65 + i)}`}
+        className="w-full p-3 border border-green-500 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500"
+      />
+      {answers.length > 2 && (
+        <button
+          type="button"
+          onClick={() => {
+            const newAnswers = answers.filter((_, index) => index !== i);
+            setValue('answers', newAnswers);
 
-                              />
-                           )}
-                        />
-                     </div>
-                  ))}
-               </div>
+            // Ajusta o índice da resposta correta, se necessário
+            if (correctIndex === i) {
+              setValue('correctIndex', 0);
+            } else if (correctIndex > i) {
+              setValue('correctIndex', correctIndex - 1);
+            }
+          }}
+          className="text-red-500 hover:underline text-sm"
+        >
+          Remover
+        </button>
+      )}
+    </div>
+  ))}
+
+  <button
+    type="button"
+    onClick={() => setValue('answers', [...answers, ''])}
+    className="mt-2 px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded shadow"
+  >
+    Adicionar alternativa
+  </button>
+</div>
 
                <button
                   type="submit"
