@@ -16,7 +16,7 @@ export interface QuestionType {
   description: string;
   year: string;
   subject: string;
-  type_question: string,
+  type_question?: string,
   image_urls?: string[];
   answers: {
     id: number;

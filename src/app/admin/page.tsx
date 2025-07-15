@@ -1,9 +1,14 @@
 'use client'
 import Link from "next/link"
+import { FaArrowLeft } from "react-icons/fa6"
+import HeaderTitle from "../components/headerTitle"
 
 export default function AdminPage() {
   return (
+    <>
+    <HeaderTitle title="ADMIN" icon={<FaArrowLeft size={24} />} href="/home" />
     <main className=" flex flex-col items-center justify-center px-4 mt-10">
+      
       <h1 className="text-3xl font-bold text-black mb-10 text-center">
         Bem-vindo ao Painel Administrativo
       </h1>
@@ -24,5 +29,6 @@ export default function AdminPage() {
         </Link>
       </div>
     </main>
+    </>
   )
 }

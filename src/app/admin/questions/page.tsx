@@ -4,6 +4,8 @@ import { useForm, Controller } from 'react-hook-form';
 import { api } from '../../services/api';
 import TopTitle from '../../home/components/topTitle';
 import type { FormInputsType, QuestionType } from '../types'
+import { FaArrowLeft } from "react-icons/fa6"
+import HeaderTitle from "../../components/headerTitle"
 
 export default function CreateQuestionPage() {
    const anos = ['2025', '2024', '2023', '2022'];
@@ -86,6 +88,7 @@ export default function CreateQuestionPage() {
 
    return (
       <div>
+          <HeaderTitle title="ADMIN" icon={<FaArrowLeft size={24} />} href="/admin" />
          <TopTitle title="Gerenciamento de questões" />
 
          <main className="flex flex-col items-center max-h-[calc(100dvh-100px)] overflow-y-auto">
