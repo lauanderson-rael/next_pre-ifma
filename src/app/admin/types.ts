@@ -4,6 +4,7 @@ export interface FormInputsType {
   description: string;
   year: string;
   subject: string;
+  type_question: string,
   answers: string[];
   correctIndex: number;
   images?: FileList | null;
@@ -15,6 +16,7 @@ export interface QuestionType {
   description: string;
   year: string;
   subject: string;
+  type_question: string,
   image_urls?: string[];
   answers: {
     id: number;

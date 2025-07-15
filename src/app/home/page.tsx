@@ -37,6 +37,7 @@ export default function Home() {
    </p>;
 
    return (
+      
       <div className="mx-auto px-3 md:px-[250px] h-[calc(100vh-60px)] overflow-y-auto">
 
          <div className="mt-2">
@@ -91,5 +92,6 @@ export default function Home() {
             />
          </div>
       </div>
+
    );
 }
