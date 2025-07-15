@@ -58,8 +58,8 @@
 //   }
 
 //   return (
-//     <>
-//     <HeaderTitle title="ADMIN3" icon={<FaArrowLeft size={24} />} href="/home" />
+//     <div>
+//     <HeaderTitle title="ADMIN" icon={<FaArrowLeft size={24} />} href="/home" />
    
 //     <main className="flex flex-col items-center justify-center px-4 bg-gray-50">
 //       <h1 className="text-2xl font-bold text-black mb-6 mt-4">Cadastrar PDF de Prova</h1>
@@ -199,7 +199,7 @@ export default function UploadPDFPage() {
     <TopTitle title="Gerenciamento de PDFs (provas e gabaritos)" />
     
     <main className=" flex flex-col items-center justify-center max-h-[calc(100dvh-100px)] overflow-y-auto">
-      
+      <div className="w-[140px]"></div>
       <h1 className="text-2xl font-bold text-black mb-6 mt-6">Enviar PDF de Prova</h1>
 
       <form onSubmit={handleSubmit} className="w-full max-w-3xl bg-white shadow-md rounded-lg p-6 space-y-4">
