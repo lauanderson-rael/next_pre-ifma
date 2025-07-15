@@ -88,7 +88,7 @@ export default function CreateQuestionPage() {
 
    return (
       <div>
-          <HeaderTitle title="ADMIN" icon={<FaArrowLeft size={24} />} href="/admin" />
+          <HeaderTitle title="ADMIN/QUESTÕES" icon={<FaArrowLeft size={24} />} href="/admin" />
          <TopTitle title="Gerenciamento de questões" />
 
          <main className="flex flex-col items-center max-h-[calc(100dvh-100px)] overflow-y-auto">
@@ -149,7 +149,7 @@ export default function CreateQuestionPage() {
                   className="w-full p-3 border border-green-500 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500"
                   {...register('images', { required: false })}
                />
-                 
+
                {/* novo */}
                <div>
                   <label className="font-medium block mb-1">Defina as alternativas</label>
@@ -227,11 +227,11 @@ export default function CreateQuestionPage() {
                </div>
             )}
 
-            <div className="mt-6 max-w-4xl mx-auto px-4">
+            <div className="mt-6 w-full max-w-3xl mx-auto px-4 ">
                <h2 className="text-2xl font-bold mb-6 text-center">Lista de Questões -Total({questionsList.length})</h2>
 
                {questionsList.map((question) => (
-                  <div key={question.id} className="border rounded-lg mb-4 p-4 bg-white">
+                  <div key={question.id} className=" border rounded mb-4 p-4 bg-white">
                      <div className="flex justify-between items-start mb-3">
                         <h3 className="text-lg font-semibold">Título: {question.title}</h3>
                         <div className="text-sm text-gray-500">ID: {question.id} | {question.year}</div>
@@ -250,7 +250,7 @@ export default function CreateQuestionPage() {
 
                      <ul className="space-y-1">
                         {question.answers.map((answer, i) => (
-                           <li key={answer.id} className={`p-2 rounded text-sm ${answer.correct ? 'bg-green-50 text-green-800' : 'text-gray-700'}`}>
+                           <li key={answer.id} className={`p-2 rounded text-sm ${answer.correct ? 'bg-green-200 text-green-800' : 'text-gray-700'}`}>
                               {String.fromCharCode(97 + i)}) {answer.text}
                               {answer.correct && <span className="ml-2 text-xs font-medium">(✓)</span>}
                               <span className="text-xs text-gray-400 ml-2">ID: {answer.id}</span>
