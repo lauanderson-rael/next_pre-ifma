@@ -23,20 +23,19 @@ export default function FiltroContent() {
 
   const [tipo, setTipo] = useState("");
   const [ano, setAno] = useState("");
-  const [campus, setCampus] = useState("");
+  // const [campus, setCampus] = useState("");
 
   const tipos = ["Integrado", "Subsequente", "Concomitante"];
   const anos = ["2025", "2024", "2023", "2022"];
-  const campi = ["Coelho Neto"];
+  // const campi = ["Coelho Neto"];
 
   const buscarProvas = () => {
-    if (!ano || !tipo || !campus)
+    if (!ano || !tipo)
       return toast.error("Preencha todos os campos!");
 
     const params = new URLSearchParams({
       year: ano,
       subject: option || "",
-      campus,
       type: tipo
     });
 
@@ -60,7 +59,7 @@ export default function FiltroContent() {
             </select>
           </div>
 
-          <div>
+          {/* <div>
             <label className="block mb-2 text-gray-700 font-medium">Campus</label>
             <select
               value={campus}
@@ -70,7 +69,7 @@ export default function FiltroContent() {
               <option value="">Selecione...</option>
               {campi.map(c => <option key={c} value={c}>{c}</option>)}
             </select>
-          </div>
+          </div> */}
 
           <div>
             <label className="block mb-2 text-gray-700 font-medium">Ano</label>

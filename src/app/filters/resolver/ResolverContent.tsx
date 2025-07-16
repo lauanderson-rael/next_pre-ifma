@@ -38,6 +38,8 @@ export default function ResolverContent() {
    const [loadingAi, setLoadingAi] = useState(false);
    const [showAi, setShowAi] = useState(false);
 
+   const questao = questions[questaoAtual];
+
    useEffect(() => {
       const carregarQuestoes = async () => {
          try {
@@ -57,14 +59,12 @@ export default function ResolverContent() {
          }
       };
       carregarQuestoes();
-      console.log('quantidade de questoes', questions.length);
    }, []);
 
-   const questao = questions[questaoAtual];
 
    const responder = async () => {
       if (!alternativaSelecionada) return;
-
+      
       const index = alternativaSelecionada.charCodeAt(0) - 97;
       const question = questions[questaoAtual];
       const answerId = question.answers[index]?.id;
@@ -184,8 +184,7 @@ if (questions.length === 0) {
             Nenhuma questão encontrada para os filtros selecionados.
          </p>
       </div>
-   );
-}
+   );}
 
    return (
 
