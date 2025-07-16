@@ -210,7 +210,7 @@ if (questions.length === 0) {
               {questao.image_urls?.map((url, index) => (
                   <div key={index} className="mb-4 bg-gray-200 flex flex-col items-center justify-center gap-2 py-2">
                      <img src={url} alt={`Imagem ${index}`} className="w-[70%] " />
-                     <img src={url} alt={`Imagem ${index}`} className="w-[70%] " />
+                     
                   </div>
               ))}
 
