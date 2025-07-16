@@ -37,7 +37,7 @@ export default function PDFList() {
   return (
     <div className="mt-2 w-full mx-auto">
       <h2 className="text-xl font-bold mb-4 text-black text-center">Lista de PDFs enviados ({pdfs.length})</h2>
-      <ul className="space-y-4">
+      <ul className="space-y-4 mx-2">
         {pdfs.map(pdf => (
           <li key={pdf.id} className="p-4  shadow rounded-md shadow-sm bg-gray-200 mb-2">
             <div className=" gap-2  items-center mb-2">
