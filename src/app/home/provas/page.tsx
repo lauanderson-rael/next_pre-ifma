@@ -21,9 +21,6 @@ export default function ProvasPage() {
    const [ano, setAno] = useState("");
    const [mostrarResultados, setMostrarResultados] = useState(false);
 
-   // const tipos = ["Integrado", "Subsequente", "Concomitante"];
-   // const anos = ["2024", "2023", "2022", "2021", "2020"];
-   
    const [pdfs, setPdfs] = useState<PDFExam[]>([])
    const [loading, setLoading] = useState(true)
    const [error, setError] = useState<string | null>(null)
@@ -39,8 +36,8 @@ export default function ProvasPage() {
    const fetchPDFs = async () => {
       try {
          const res = await api.get('/pdf_exams')
-         console.log('PDFs:', res.data)
-         setPdfs(res.data || [])
+         const filteredPDFs = res.data.filter((pdf: PDFExam) => pdf.type_pdf === tipo && pdf.year === Number(ano))
+         setPdfs(filteredPDFs || [])
       } catch (err: any) {
          setError(err.response?.data?.error || 'Erro ao buscar PDFs')
       } finally {
@@ -99,8 +96,7 @@ export default function ProvasPage() {
             {mostrarResultados && (
                <section className="w-full max-w-3xl flex flex-col gap-6 px-4 mt-6 mb-20">
                   <div className="text-center text-gray-700 font-semibold">Resultado:</div>
-                  {pdfs.filter(pdf => pdf.type_pdf === tipo && pdf.year === Number(ano))
-                       .map(pdf =>(
+                  {pdfs.map(pdf =>(
                      <div key={pdf.id} className="flex justify-between items-center gap-8 bg-gray-300 p-4 rounded-lg shadow border border-gray-400">
                         <div>
                            <h3 className="text font-bold text-amber-900 mb-2 text-sm md:text-base">PROCESSO SELETIVO DE ALUNOS - IFMA {pdf.year}</h3>
@@ -117,6 +113,8 @@ export default function ProvasPage() {
                         </div>
                      </div>
                   ))}
+
+                  {pdfs.length === 0 && <p className="text-center text-gray-500">Nenhum arquivo encontrado.</p>}
                </section>
             )}
          </main>

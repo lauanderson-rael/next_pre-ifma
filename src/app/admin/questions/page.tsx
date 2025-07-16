@@ -96,13 +96,13 @@ export default function CreateQuestionPage() {
             <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-3xl space-y-4 px-4 mt-2">
                <input
                   type="text"
-                  placeholder="Título"
+                  placeholder="Título/enunciado da questão"
                   className="w-full p-3 border border-green-500 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500"
                   {...register('title', { required: true })}
                />
 
                <textarea
-                  placeholder="Descrição"
+                  placeholder="Descrição/Texto da questão"
                   rows={4}
                   className="w-full p-3 border border-green-500 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500"
                   {...register('description', { required: true })}
