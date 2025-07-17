@@ -17,7 +17,7 @@ export default function FiltroContent() {
     case 'portugues':
       title = "Português";
       break;
-    default:
+    default: // option=simulado
       title = "Simulado de 10 questões";
   }
 
@@ -39,6 +39,13 @@ export default function FiltroContent() {
       type: tipo
     });
 
+    //  window.location.href = `/filters/resolver?${params.toString()}`;
+  
+    if (option==='simulado'){
+      window.location.href = `/filters/simulate?${params.toString()}`;
+      return
+    }
+    
     window.location.href = `/filters/resolver?${params.toString()}`;
   };
 

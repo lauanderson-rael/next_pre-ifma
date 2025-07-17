@@ -10,25 +10,15 @@ import { api } from '@/app/services/api';
 import { useSearchParams } from 'next/navigation';
 import { RiAiGenerate2 } from "react-icons/ri";
 
-export default function ResolverContent() {
+export default function Content() {
    const [loading, setLoading] = useState(true);
    const searchParams = useSearchParams();
    const year = searchParams.get('year');
    const subject = searchParams.get('subject');
+   console.log('Subject:', subject)
    const type = searchParams.get('type');
 
-   let title = ""
-   switch (subject) {
-      case 'matematica':
-         title = "Matemática"
-         break;
-      case 'portugues':
-         title = "Português"
-         break;
-      default:
-         title = "xxx"
-         break;
-   }
+   let title = "Simulado de 30 questões"
 
    const [questions, setQuestions] = useState<Question[]>([]);
    const [questaoAtual, setQuestaoAtual] = useState(0);
@@ -46,7 +36,7 @@ export default function ResolverContent() {
             let response;
             if (subject === "simulado") {
                response = await api.get('/simulates/questions');
-               console.log("Todas as questoes",response.data.questions);
+               console.log("Todas as questoes", response.data.questions);
                setQuestions(response.data.questions.slice(0, 10));
             } else {
                response = await api.get(`/simulates/questions?q[subject_cont]=${subject}&q[year_eq]=${year}`);
@@ -54,7 +44,7 @@ export default function ResolverContent() {
             }
          } catch (error) {
             console.log('Erro ao buscar questões:', error);
-         }finally{
+         } finally {
             setLoading(false);
          }
       };
@@ -64,7 +54,7 @@ export default function ResolverContent() {
 
    const responder = async () => {
       if (!alternativaSelecionada) return;
-      
+
       const index = alternativaSelecionada.charCodeAt(0) - 97;
       const question = questions[questaoAtual];
       const answerId = question.answers[index]?.id;
@@ -100,7 +90,7 @@ export default function ResolverContent() {
 
       } catch (err) {
          console.error("Erro ao responder:", err);
-      }finally{
+      } finally {
          setShowAi(true);
       }
    };
@@ -156,35 +146,36 @@ export default function ResolverContent() {
    }
    // gemini
 
-if (loading) {
-   return (
-      <div>
-          <HeaderTitle
+   if (loading) {
+      return (
+         <div>
+            <HeaderTitle
                href={`/filters?option=${subject}`}
                title='Aguarde...'
                icon={<FaArrowLeft size={20} />}
-         />
-         <p className="text-center text-xl mt-36 animate-bounce text-green-700 font-bold">
-            Carregando questões...
-         </p>
-      </div>
-   );
-}
+            />
+            <p className="text-center text-xl mt-36 animate-bounce text-green-700 font-bold">
+               Carregando questões...
+            </p>
+         </div>
+      );
+   }
 
-if (questions.length === 0) {
-   return (
-      <div>
-         <HeaderTitle
+   if (questions.length === 0) {
+      return (
+         <div>
+            <HeaderTitle
                href={`/filters?option=${subject}`}
                title='Sem questões :('
                icon={<FaArrowLeft size={20} />}
-         />
+            />
 
-         <p className="text-center text-xl mt-36 text-red-600 font-semibold">
-            Nenhuma questão encontrada para os filtros selecionados.
-         </p>
-      </div>
-   );}
+            <p className="text-center text-xl mt-36 text-red-600 font-semibold">
+               Nenhuma questão encontrada para os filtros selecionados.
+            </p>
+         </div>
+      );
+   }
 
    return (
 
@@ -197,7 +188,13 @@ if (questions.length === 0) {
                icon={<FaArrowLeft size={20} />}
             />
             <TopTitle title={`${type} - ${year}`}>
-               ({title})
+               <div className='flex gap-2'>
+                     ({title})
+                     <div className='mr-2 bg-red-600 w-[60px] flex itens-center text-center text-white'>
+                        30:00
+                     </div>
+               </div>
+
             </TopTitle>
          </header>
 
@@ -207,12 +204,12 @@ if (questions.length === 0) {
 
                <p className='mb-2 '>{questao.description}</p>
 
-              {questao.image_urls?.map((url, index) => (
+               {questao.image_urls?.map((url, index) => (
                   <div key={index} className="mb-4 bg-gray-200 flex flex-col items-center justify-center gap-2 py-2">
                      <img src={url} alt={`Imagem ${index}`} className="w-[70%] " />
-                     
+
                   </div>
-              ))}
+               ))}
 
                <div className="bg-white border border-gray-300 rounded p-4 shadow-sm mb-4">
                   <p className="text-gray-800 font-medium">{questao.title}</p>
@@ -268,7 +265,7 @@ if (questions.length === 0) {
             {/* Botões */}
             <div className="pt-6 space-y-2 max-w-3xl mx-auto px-4 sm:px-0">
                <button
-                  onClick={()=> {showAi && geminiSubmit()}}
+                  onClick={() => { showAi && geminiSubmit() }}
                   disabled={!showAi}
                   className="flex justify-center gap-2 items-center w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-lg font-bold shadow  disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-500"
                >
