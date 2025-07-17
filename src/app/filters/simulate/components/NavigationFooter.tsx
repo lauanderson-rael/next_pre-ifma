@@ -48,12 +48,12 @@ export default function NavigationFooter({
             Anterior
           </button>
           
-          {/* <span className="text-sm text-gray-600">
+           <span className="text-sm text-gray-600">
             {questaoAtual + 1} de {totalQuestions}
           </span>
-           */}
-           <div className="md:w-[60%] w-[40%]">
-
+           
+           <div className="">
+             {/*md:w-[60%] w-[40%] */}
            {children}
            </div>
           <button
