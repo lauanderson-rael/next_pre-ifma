@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
 import TopTitle from "../home/components/topTitle";
 
-export default function FiltroContent() {
+export default function Content() {
   const searchParams = useSearchParams();
   const option = searchParams.get('option');
 
@@ -18,7 +18,7 @@ export default function FiltroContent() {
       title = "Português";
       break;
     default: // option=simulado
-      title = "Simulado de 10 questões";
+      title = "Simulado de 30 questões";
   }
 
   const [tipo, setTipo] = useState("");
@@ -66,18 +66,6 @@ export default function FiltroContent() {
             </select>
           </div>
 
-          {/* <div>
-            <label className="block mb-2 text-gray-700 font-medium">Campus</label>
-            <select
-              value={campus}
-              onChange={(e) => setCampus(e.target.value)}
-              className="w-full p-3 border border-green-500 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
-            >
-              <option value="">Selecione...</option>
-              {campi.map(c => <option key={c} value={c}>{c}</option>)}
-            </select>
-          </div> */}
-
           <div>
             <label className="block mb-2 text-gray-700 font-medium">Ano</label>
             <select
@@ -91,11 +79,15 @@ export default function FiltroContent() {
           </div>
 
           <div className="pt-2">
+            {option === 'simulado' && (
+              <p className="mb-3 text-center text-red-700">OBS: O simulado tem uma duração de 40 minutos</p>
+            )}
+            
             <button
               onClick={buscarProvas}
               className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-semibold shadow"
             >
-              Avançar
+              {option === 'simulado' ? 'Iniciar simulado' : 'avancar'}
             </button>
           </div>
         </section>

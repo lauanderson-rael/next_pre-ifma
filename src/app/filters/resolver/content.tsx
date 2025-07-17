@@ -10,7 +10,7 @@ import { api } from '@/app/services/api';
 import { useSearchParams } from 'next/navigation';
 import { RiAiGenerate2 } from "react-icons/ri";
 
-export default function ResolverContent() {
+export default function Content() {
    const [loading, setLoading] = useState(true);
    const searchParams = useSearchParams();
    const year = searchParams.get('year');
