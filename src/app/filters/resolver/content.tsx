@@ -26,7 +26,7 @@ export default function Content() {
          title = "Português"
          break;
       default:
-         title = "xxx"
+         title = "simulado"
          break;
    }
 
@@ -205,17 +205,17 @@ if (questions.length === 0) {
          <main className="flex-1 px-4 pb-28 mt-3 overflow-y-auto max-h-[60vh]">
             <div className="w-full max-w-3xl mx-auto">
 
-               <p className='mb-2 '>{questao.description}</p>
+               <p className='mb-2 text-sm'>{questao.description}</p>
 
               {questao.image_urls?.map((url, index) => (
-                  <div key={index} className="mb-4 bg-gray-200 flex flex-col items-center justify-center gap-2 py-2">
-                     <img src={url} alt={`Imagem ${index}`} className="w-[70%] " />
+                  <div key={index} className="mb-4 bg-gray-100 flex flex-col items-center justify-center gap-2 py-2">
+                     <img src={url} alt={`Imagem ${index}`} className="w-[60%]" />
                      
                   </div>
               ))}
 
-               <div className="bg-white border border-gray-300 rounded p-4 shadow-sm mb-4">
-                  <p className="text-gray-800 font-medium">{questao.title}</p>
+               <div className="bg-white border border-gray-300 rounded p-3 shadow-sm mb-4">
+                  <p className="text-gray-800 font-medium text-sm">{questao.title}</p>
                </div>
 
                <div className="space-y-3">
@@ -224,7 +224,7 @@ if (questions.length === 0) {
                      return (
                         <label
                            key={answer.id}
-                           className={`block p-3 border rounded-lg cursor-pointer transition-all ${alternativaSelecionada === letra
+                           className={`block p-3 border rounded-lg cursor-pointer transition-all text-sm ${alternativaSelecionada === letra
                               ? 'bg-green-100 border-green-600'
                               : 'bg-white border-gray-300 hover:border-green-400'
                               }`}
@@ -266,7 +266,7 @@ if (questions.length === 0) {
          {/* Footer fixo */}
          <footer className="fixed bottom-0 w-full left-0 bg-white">
             {/* Botões */}
-            <div className="pt-6 space-y-2 max-w-3xl mx-auto px-4 sm:px-0">
+            <div className="pt-6 space-y-2 max-w-3xl mx-auto px-4 sm:px-0 text-sm">
                <button
                   onClick={()=> {showAi && geminiSubmit()}}
                   disabled={!showAi}
@@ -283,7 +283,7 @@ if (questions.length === 0) {
                </button>
             </div>
 
-            <div className='flex justify-between items-center max-w-3xl mx-auto m-4 px-4 sm:px-0'>
+            <div className='flex justify-between items-center max-w-3xl mx-auto m-4 px-4 sm:px-0 text-sm'>
                <button
                   onClick={anterior}
                   disabled={questaoAtual === 0}

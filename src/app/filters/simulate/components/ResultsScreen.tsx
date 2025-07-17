@@ -27,7 +27,7 @@ export default function ResultsScreen({
       </header>
 
       <main className="flex-1 px-4 py-6">
-        <div className="w-full max-w-3xl mx-auto">
+        <div className="w-full  mx-auto overflow-y-auto max-h-[100vh] md:max-h-[70vh] ">
           <div className="bg-white border border-gray-300 rounded-lg p-6 shadow-sm mb-6 text-center">
             <h2 className="text-2xl font-bold mb-4">Simulado Finalizado!</h2>
             <div className="text-4xl font-bold mb-2">
@@ -81,7 +81,7 @@ export default function ResultsScreen({
               onClick={onVoltarHome}
               className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-bold shadow"
             >
-              Voltar para Home
+              Voltar para Tela inicial
             </button>
           </div>
         </div>

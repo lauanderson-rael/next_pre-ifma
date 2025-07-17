@@ -11,9 +11,9 @@ export default function ProgressBar({
   questaoAtual 
 }: ProgressBarProps) {
   return (
-    <div className="bg-gray-100 p-2">
+    <div className="bg-gray-100 p-2 rounded">
       <div className="max-w-3xl mx-auto">
-        <div className="flex justify-between items-center text-sm text-gray-600">
+        <div className="flex justify-center items-center text-sm text-gray-600">
           <span>Progresso: {respostasCount}/{totalQuestions}</span>
           {/* <span>{questaoAtual + 1} de {totalQuestions}</span> */}
         </div>

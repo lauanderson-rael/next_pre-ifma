@@ -399,12 +399,10 @@ function SimuladoContent() {
           </div>
         </TopTitle>
       </header>
-
-      {/* Progress Bar */}
       
 
       {/* Main Content */}
-      <main className="flex-1 px-4 pb-32 mt-3 overflow-y-auto">
+      <main className="flex-1 px-4 pb-32 overflow-y-auto max-h-[70vh]">
         <QuestionCard 
           question={questao}
           alternativaSelecionada={alternativaSelecionada}
@@ -419,7 +417,8 @@ function SimuladoContent() {
         isUltimaQuestao={isUltimaQuestao}
         todasRespondidas={todasRespondidas}
         submitting={submitting}
-        children={<ProgressBar 
+        children={
+        <ProgressBar 
         respostasCount={respostas.length}
         totalQuestions={questions.length}
         questaoAtual={questaoAtual}

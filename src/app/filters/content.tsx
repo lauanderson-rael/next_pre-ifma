@@ -79,9 +79,9 @@ export default function Content() {
           </div>
 
           <div className="pt-2">
-            {option === 'simulado' && (
+            {/* {option === 'simulado' && (
               <p className="mb-3 text-center text-red-700">OBS: O simulado tem uma duração de 40 minutos</p>
-            )}
+            )} */}
             
             <button
               onClick={buscarProvas}

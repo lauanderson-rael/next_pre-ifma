@@ -32,14 +32,14 @@ export default function NavigationFooter({
           <button
             onClick={onFinalizar}
             disabled={submitting || !todasRespondidas}
-            className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-bold shadow mb-4 disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-500"
+            className="w-full bg-green-600 hover:bg-green-700 text-white text-sm py-3 rounded-lg font-bold shadow mb-4 disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-500"
           >
             {submitting ? 'Enviando...' : 'Finalizar Simulado'}
           </button>
         )}
 
         {/* Navegação */}
-        <div className='flex justify-between items-center'>
+        <div className='flex justify-between items-center text-sm'>
           <button
             onClick={onAnterior}
             disabled={questaoAtual === 0}
@@ -52,7 +52,10 @@ export default function NavigationFooter({
             {questaoAtual + 1} de {totalQuestions}
           </span>
            */}
+           <div className="md:w-[60%] w-[40%]">
+
            {children}
+           </div>
           <button
             onClick={onProxima}
             disabled={questaoAtual === totalQuestions - 1}
