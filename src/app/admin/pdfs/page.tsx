@@ -29,7 +29,7 @@ export default function UploadPDFPage() {
     e.preventDefault()
 
     try {
-      const response = await api.post('/pdf_exams', {
+      await api.post('/pdf_exams', {
         ...formData,
         year: Number(formData.year)
       }, )

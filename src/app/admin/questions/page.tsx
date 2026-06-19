@@ -1,6 +1,6 @@
 'use client';
-import { useEffect, useState } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { useEffect, useState, useRef } from 'react';
+import { useForm } from 'react-hook-form';
 import { api } from '../../services/api';
 import TopTitle from '../../home/components/topTitle';
 import type { FormInputsType, QuestionType } from '../types'
@@ -10,7 +10,7 @@ import HeaderTitle from "../../components/headerTitle"
 export default function CreateQuestionPage() {
    const anos = ['2025', '2024', '2023', '2022'];
 
-   const { register, handleSubmit, control, setValue, getValues, watch, reset } = useForm<FormInputsType>({
+   const { register, handleSubmit, setValue, watch, reset } = useForm<FormInputsType>({
       defaultValues: {
          title: '',
          description: '',
@@ -26,6 +26,7 @@ export default function CreateQuestionPage() {
    const [status, setStatus] = useState<string | null>(null);
    const answers = watch('answers');
    const correctIndex = watch('correctIndex');
+   const answerIds = useRef<number[]>([0, 1, 2, 3]);
 
    const onSubmit = async (data: FormInputsType) => {
       const formData = new FormData();
@@ -141,8 +142,9 @@ export default function CreateQuestionPage() {
                </select>
                 {/* novo */}
 
-               <label className="font-medium block mb-1">Imagem (Opcional)</label>
+               <label htmlFor="images-input" className="font-medium block mb-1">Imagem (Opcional)</label>
                <input
+                  id="images-input"
                   type="file"
                   multiple
                   accept='image/*'
@@ -151,10 +153,10 @@ export default function CreateQuestionPage() {
                />
 
                {/* novo */}
-               <div>
-                  <label className="font-medium block mb-1">Defina as alternativas</label>
+               <fieldset>
+                  <legend className="font-medium block mb-1">Defina as alternativas</legend>
                   {answers.map((ans, i) => (
-                     <div key={i} className="flex items-center mb-2 gap-3">
+                     <div key={answerIds.current[i]} className="flex items-center mb-2 gap-3">
                         <input
                            type="radio"
                            value={i}
@@ -178,9 +180,9 @@ export default function CreateQuestionPage() {
                               type="button"
                               onClick={() => {
                                  const newAnswers = answers.filter((_, index) => index !== i);
+                                 answerIds.current = answerIds.current.filter((_, index) => index !== i);
                                  setValue('answers', newAnswers);
 
-                                 // Ajusta o índice da resposta correta, se necessário
                                  if (correctIndex === i) {
                                     setValue('correctIndex', 0);
                                  } else if (correctIndex > i) {
@@ -197,12 +199,16 @@ export default function CreateQuestionPage() {
 
                   <button
                      type="button"
-                     onClick={() => setValue('answers', [...answers, ''])}
+                     onClick={() => {
+                       const nextId = answerIds.current.length > 0 ? Math.max(...answerIds.current) + 1 : 0;
+                       answerIds.current = [...answerIds.current, nextId];
+                       setValue('answers', [...answers, '']);
+                     }}
                      className="mt-2 font-semibold px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded shadow"
                   >
                      +
                   </button>
-               </div>
+               </fieldset>
                 {/* novo */}
 
                <button
