@@ -1,31 +1,27 @@
 
 'use client'
 
-// import { AuthContext } from "../contexts/AuthContext";
 import { BsFire } from "react-icons/bs";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { api } from "../services/api";
 
 type UserDataType = {
-   name: string;
-   current_streak: number;
+  name: string;
+  current_streak: number;
 };
 
 
 export default function Header() {
-//   const { user } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
 
   const [dataUser, setDataUser] = useState<UserDataType | null>(null);
-     const [loading, setLoading] = useState(true);
 
-     useEffect(() => {
-        api.get("/users/data")
-           .then((res) => setDataUser(res.data))
-           .catch((err) => console.error(err))
-           .finally(() => setLoading(false));
-     }, []);
+  useEffect(() => {
+    api.get("/users/data")
+      .then((res) => setDataUser(res.data))
+      .catch((err) => console.error(err));
+  }, []);
 
   return (
     <>

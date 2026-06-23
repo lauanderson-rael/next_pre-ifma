@@ -1,5 +1,5 @@
 'use client'
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { api } from "../services/api";
 
@@ -93,8 +93,10 @@ export function AuthProvider({children}: any){
       setUser(null);
    };
 
+    const value = useMemo(() => ({ user, signIn, isAuthenticated, logout }), [user, isAuthenticated]);
+
     return (
-        <AuthContext.Provider value={{user, signIn, isAuthenticated, logout}}>
+        <AuthContext.Provider value={value}>
             {children}
         </AuthContext.Provider>
     )

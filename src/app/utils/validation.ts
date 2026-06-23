@@ -1,9 +1,9 @@
 // Funções de data, hora e validação avançada
-export const isDate = (date: any): boolean => date instanceof Date && !isNaN(date.getTime());
+export const isDate = (date: any): boolean => date instanceof Date && !Number.isNaN(date.getTime());
 
 export const isValidDate = (dateString: string): boolean => {
   const timestamp = Date.parse(dateString);
-  return !isNaN(timestamp);
+  return !Number.isNaN(timestamp);
 };
 
 export const daysInMonth = (year: number, month: number): number => {
@@ -61,13 +61,13 @@ export const isUrl = (str: string): boolean => {
 };
 
 export const isPhoneNumber = (str: string): boolean => {
-  const phoneRegex = /^[\d\s\-\+\(\)]{10,}$/;
+  const phoneRegex = /^[\d\s\-+()]{10,}$/;
   return phoneRegex.test(str);
 };
 
 export const isCreditCard = (str: string): boolean => {
-  const cardRegex = /^[0-9]{13,19}$/;
-  return cardRegex.test(str.replace(/\s/g, ''));
+  const cardRegex = /^\d{13,19}$/;
+  return cardRegex.test(str.replaceAll(/\s/g, ''));
 };
 
 export const isStrongPassword = (password: string): boolean => {
@@ -75,8 +75,8 @@ export const isStrongPassword = (password: string): boolean => {
     password.length >= 8 &&
     /[a-z]/.test(password) &&
     /[A-Z]/.test(password) &&
-    /[0-9]/.test(password) &&
-    /[^a-zA-Z0-9]/.test(password)
+    /\d/.test(password) &&
+    /[^a-zA-Z\d]/.test(password)
   );
 };
 
@@ -108,7 +108,7 @@ export const isAlphabetic = (str: string): boolean => {
 };
 
 export const isNumeric = (str: string): boolean => {
-  return /^[0-9]+$/.test(str);
+  return /^\d+$/.test(str);
 };
 
 export const isEmpty = (value: any): boolean => {

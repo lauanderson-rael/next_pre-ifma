@@ -84,7 +84,7 @@ const Carousel: React.FC<CarouselProps> = ({
         >
           {images.map((image, index) => (
             <div
-              key={index}
+              key={image}
               className="w-full flex-shrink-0 relative"
             >
               <img
@@ -100,9 +100,9 @@ const Carousel: React.FC<CarouselProps> = ({
 
         {showIndicators && images.length > 1 && (
         <div className="flex justify-center mt-4 space-x-2 absolute bottom-2 left-1/2">
-          {images.map((_, index) => (
+          {images.map((image, index) => (
             <button
-              key={index}
+              key={image}
               onClick={() => goToSlide(index)}
               className={`w-3 h-3 rounded-full transition-all duration-200 ${
                 index === currentIndex

@@ -1,6 +1,6 @@
 // Funções utilitárias para transformação de dados
 export const transformAnswersToLetters = (answers: any[]): string[] => {
-  return answers.map((_, index) => String.fromCharCode(97 + index));
+  return answers.map((_, index) => String.fromCodePoint(97 + index));
 };
 
 export const findCorrectAnswerIndex = (answers: any[]): number => {

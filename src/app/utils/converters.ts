@@ -1,7 +1,7 @@
 // Funções de conversão e parsing
 export const stringToNumber = (str: string): number | null => {
   const num = Number(str);
-  return isNaN(num) ? null : num;
+  return Number.isNaN(num) ? null : num;
 };
 
 export const stringToBoolean = (str: string): boolean => {

@@ -23,11 +23,9 @@ export default function Content() {
 
   const [tipo, setTipo] = useState("");
   const [ano, setAno] = useState("");
-  // const [campus, setCampus] = useState("");
 
   const tipos = ["Integrado", "Subsequente", "Concomitante"];
   const anos = ["2025", "2024", "2023", "2022"];
-  // const campi = ["Coelho Neto"];
 
   const buscarProvas = () => {
     if (!ano || !tipo)
@@ -39,13 +37,12 @@ export default function Content() {
       type: tipo
     });
 
-    //  window.location.href = `/filters/resolver?${params.toString()}`;
-  
-    if (option==='simulado'){
+
+    if (option === 'simulado') {
       window.location.href = `/filters/simulate?${params.toString()}`;
       return
     }
-    
+
     window.location.href = `/filters/resolver?${params.toString()}`;
   };
 
@@ -81,10 +78,7 @@ export default function Content() {
           </div>
 
           <div className="pt-2">
-            {/* {option === 'simulado' && (
-              <p className="mb-3 text-center text-red-700">OBS: O simulado tem uma duração de 40 minutos</p>
-            )} */}
-            
+
             <button
               onClick={buscarProvas}
               className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-semibold shadow"

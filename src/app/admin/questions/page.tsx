@@ -172,7 +172,7 @@ export default function CreateQuestionPage() {
                               newAnswers[i] = e.target.value;
                               setValue('answers', newAnswers);
                            }}
-                           placeholder={`Alternativa ${String.fromCharCode(65 + i)}`}
+                           placeholder={`Alternativa ${String.fromCodePoint(65 + i)}`}
                            className="w-full p-3 border border-green-500 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500"
                         />
                         {answers.length > 4 && (
@@ -257,7 +257,7 @@ export default function CreateQuestionPage() {
                      <ul className="space-y-1">
                         {question.answers.map((answer, i) => (
                            <li key={answer.id} className={`p-2 rounded text-sm ${answer.correct ? 'bg-green-200 text-green-800' : 'text-gray-700'}`}>
-                              {String.fromCharCode(97 + i)}) {answer.text}
+                              {String.fromCodePoint(97 + i)}) {answer.text}
                               {answer.correct && <span className="ml-2 text-xs font-medium">(✓)</span>}
                               <span className="text-xs text-gray-400 ml-2">ID: {answer.id}</span>
                            </li>

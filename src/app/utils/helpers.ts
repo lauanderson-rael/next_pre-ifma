@@ -84,7 +84,7 @@ export const union = <T>(arr1: T[], arr2: T[]): T[] => {
 };
 
 export const isPalindrome = (str: string): boolean => {
-  const cleaned = str.toLowerCase().replace(/\s+/g, '');
+  const cleaned = str.toLowerCase().replaceAll(/\s+/g, '');
   return cleaned === cleaned.split('').reverse().join('');
 };
 

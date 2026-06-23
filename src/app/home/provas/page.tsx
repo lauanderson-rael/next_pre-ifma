@@ -22,7 +22,6 @@ export default function ProvasPage() {
    const [mostrarResultados, setMostrarResultados] = useState(false);
 
    const [pdfs, setPdfs] = useState<PDFExam[]>([])
-   const [loading, setLoading] = useState(true)
    const [error, setError] = useState<string | null>(null)
 
    const buscarProvas = () => {
@@ -40,8 +39,6 @@ export default function ProvasPage() {
          setPdfs(filteredPDFs || [])
       } catch (err: any) {
          setError(err.response?.data?.error || 'Erro ao buscar PDFs')
-      } finally {
-         setLoading(false)
       }
    }
 
@@ -53,8 +50,9 @@ export default function ProvasPage() {
             <section className="w-full max-w-3xl space-y-2 px-4 mt-2">
                {/* Tipo de prova */}
                <div>
-                  <label className="block mb-2 text-gray-700 font-medium">Selecione o tipo de prova</label>
+                  <label htmlFor="tipo-prova" className="block mb-2 text-gray-700 font-medium">Selecione o tipo de prova</label>
                   <select
+                     id="tipo-prova"
                      value={tipo}
                      onChange={(e) => setTipo(e.target.value)}
                      className="w-full p-3 border border-green-500 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
@@ -68,8 +66,9 @@ export default function ProvasPage() {
 
                {/* Ano */}
                <div>
-                  <label className="block mb-2 text-gray-700 font-medium">Ano</label>
+                  <label htmlFor="ano" className="block mb-2 text-gray-700 font-medium">Ano</label>
                   <select
+                     id="ano"
                      value={ano}
                      onChange={(e) => setAno(e.target.value)}
                      className="w-full p-3 border border-green-500 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"

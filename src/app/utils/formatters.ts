@@ -32,7 +32,7 @@ export const removeDuplicates = <T>(array: T[]): T[] => {
 };
 
 export const removeSpecialCharacters = (text: string): string => {
-  return text.replace(/[^a-zA-Z0-9\s]/g, '');
+  return text.replaceAll(/[^a-zA-Z0-9\s]/g, '');
 };
 
 export const generateGradeMessage = (percentage: number): string => {

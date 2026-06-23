@@ -46,7 +46,7 @@ export default function Content() {
             let response;
             if (subject === "simulado") {
                response = await api.get('/simulates/questions');
-               console.log("Todas as questoes",response.data.questions);
+               console.log("Todas as questoes", response.data.questions);
                setQuestions(response.data.questions.slice(0, 10));
             } else {
                response = await api.get(`/simulates/questions?q[subject_cont]=${subject}&q[year_eq]=${year}`);
@@ -54,7 +54,7 @@ export default function Content() {
             }
          } catch (error) {
             console.log('Erro ao buscar questões:', error);
-         }finally{
+         } finally {
             setLoading(false);
          }
       };
@@ -64,8 +64,8 @@ export default function Content() {
 
    const responder = async () => {
       if (!alternativaSelecionada) return;
-      
-      const index = alternativaSelecionada.charCodeAt(0) - 97;
+
+      const index = alternativaSelecionada.codePointAt(0)! - 97;
       const question = questions[questaoAtual];
       const answerId = question.answers[index]?.id;
       if (!answerId) {
@@ -96,11 +96,10 @@ export default function Content() {
             somErro.play();
             toast.error('Que pena, voce errou!');
          }
-         //setTimeout(() => { proxima(); }, 2500);
 
       } catch (err) {
          console.error("Erro ao responder:", err);
-      }finally{
+      } finally {
          setShowAi(true);
       }
    };
@@ -156,35 +155,36 @@ export default function Content() {
    }
    // gemini
 
-if (loading) {
-   return (
-      <div>
-          <HeaderTitle
+   if (loading) {
+      return (
+         <div>
+            <HeaderTitle
                href={`/filters?option=${subject}`}
                title='Aguarde...'
                icon={<FaArrowLeft size={20} />}
-         />
-         <p className="text-center text-xl mt-36 animate-bounce text-green-700 font-bold">
-            Carregando questões...
-         </p>
-      </div>
-   );
-}
+            />
+            <p className="text-center text-xl mt-36 animate-bounce text-green-700 font-bold">
+               Carregando questões...
+            </p>
+         </div>
+      );
+   }
 
-if (questions.length === 0) {
-   return (
-      <div>
-         <HeaderTitle
+   if (questions.length === 0) {
+      return (
+         <div>
+            <HeaderTitle
                href={`/filters?option=${subject}`}
                title='Sem questões :('
                icon={<FaArrowLeft size={20} />}
-         />
+            />
 
-         <p className="text-center text-xl mt-36 text-red-600 font-semibold">
-            Nenhuma questão encontrada para os filtros selecionados.
-         </p>
-      </div>
-   );}
+            <p className="text-center text-xl mt-36 text-red-600 font-semibold">
+               Nenhuma questão encontrada para os filtros selecionados.
+            </p>
+         </div>
+      );
+   }
 
    return (
 
@@ -207,12 +207,12 @@ if (questions.length === 0) {
 
                <p className='mb-2 text-sm'>{questao.description}</p>
 
-              {questao.image_urls?.map((url, index) => (
-                  <div key={index} className="mb-4 bg-gray-100 flex flex-col items-center justify-center gap-2 py-2">
+               {questao.image_urls?.map((url, index) => (
+                  <div key={url} className="mb-4 bg-gray-100 flex flex-col items-center justify-center gap-2 py-2">
                      <img src={url} alt={`Imagem ${index}`} className="w-[60%]" />
-                     
+
                   </div>
-              ))}
+               ))}
 
                <div className="bg-white border border-gray-300 rounded p-3 shadow-sm mb-4">
                   <p className="text-gray-800 font-medium text-sm">{questao.title}</p>
@@ -220,7 +220,7 @@ if (questions.length === 0) {
 
                <div className="space-y-3">
                   {questao.answers.map((answer, index) => {
-                     const letra = String.fromCharCode(97 + index); // 'a', 'b', 'c', etc.
+                     const letra = String.fromCodePoint(97 + index); // 'a', 'b', 'c', etc.
                      return (
                         <label
                            key={answer.id}
@@ -268,7 +268,7 @@ if (questions.length === 0) {
             {/* Botões */}
             <div className="pt-6 space-y-2 max-w-3xl mx-auto px-4 sm:px-0 text-sm">
                <button
-                  onClick={()=> {showAi && geminiSubmit()}}
+                  onClick={() => { showAi && geminiSubmit() }}
                   disabled={!showAi}
                   className="flex justify-center gap-2 items-center w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-lg font-bold shadow  disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-500"
                >

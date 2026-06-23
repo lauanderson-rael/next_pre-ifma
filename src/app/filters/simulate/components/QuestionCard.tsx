@@ -17,7 +17,7 @@ export default function QuestionCard({
       <p className='mb-2 text-sm'>{question.description}</p>
 
       {question.image_urls?.map((url, index) => (
-        <div key={index} className="mb-4 bg-gray-100 flex flex-col items-center justify-center gap-2 py-2">
+        <div key={url} className="mb-4 bg-gray-100 flex flex-col items-center justify-center gap-2 py-2">
           <img src={url} alt={`Imagem ${index}`} className="w-[60%]" />
         </div>
       ))}
@@ -28,7 +28,7 @@ export default function QuestionCard({
 
       <div className="space-y-3">
         {question.answers.map((answer, index) => {
-          const letra = String.fromCharCode(97 + index);
+          const letra = String.fromCodePoint(97 + index);
           return (
             <label
               key={answer.id}

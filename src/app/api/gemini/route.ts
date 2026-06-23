@@ -18,6 +18,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     prompt = body.prompt;
   } catch (error) {
+    console.error(error);
     return NextResponse.json({ message: 'Body da requisição inválido ou vazio.' }, { status: 400 });
   }
 

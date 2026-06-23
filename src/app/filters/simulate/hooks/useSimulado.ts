@@ -37,7 +37,7 @@ export const useSimulado = () => {
 
   const selecionarAlternativa = (letra: string) => {
     const question = questions[questaoAtual];
-    const index = letra.charCodeAt(0) - 97;
+    const index = letra.codePointAt(0)! - 97;
     const answerId = question.answers[index]?.id;
     
     if (!answerId) {
@@ -90,7 +90,7 @@ export const useSimulado = () => {
       const resultados: SimulateResult[] = responses.map((response, index) => {
         const question = questions.find(q => q.id === respostas[index].question_id) as Question;
         const correctAnswer = question?.answers.find(a => a.correct);
-        const correctLetter = correctAnswer ? String.fromCharCode(97 + question.answers.indexOf(correctAnswer)) : '';
+        const correctLetter = correctAnswer ? String.fromCodePoint(97 + question.answers.indexOf(correctAnswer)) : '';
         
         return {
           correct: response.data.correct,

@@ -15,6 +15,20 @@ export default function ResultsScreen({
   onVoltarHome 
 }: ResultsScreenProps) {
   const porcentagem = Math.round((score.correct / score.total) * 100);
+
+  let badgeClass: string;
+  let badgeText: string;
+
+  if (porcentagem >= 70) {
+    badgeClass = 'bg-green-100 text-green-800';
+    badgeText = 'Excelente!';
+  } else if (porcentagem >= 60) {
+    badgeClass = 'bg-yellow-100 text-yellow-800';
+    badgeText = 'Bom!';
+  } else {
+    badgeClass = 'bg-red-100 text-red-800';
+    badgeText = 'Continue estudando!';
+  }
   
   return (
     <div className="min-h-screen flex flex-col">
@@ -37,13 +51,8 @@ export default function ResultsScreen({
             <p className="text-xl text-gray-600 mb-4">
               Você acertou {porcentagem}% das questões
             </p>
-            <div className={`inline-block px-4 py-2 rounded-lg font-semibold ${
-              porcentagem >= 70 ? 'bg-green-100 text-green-800' :
-              porcentagem >= 60 ? 'bg-yellow-100 text-yellow-800' :
-              'bg-red-100 text-red-800'
-            }`}>
-              {porcentagem >= 70 ? 'Excelente!' : 
-               porcentagem >= 60 ? 'Bom!' : 'Continue estudando!'}
+            <div className={`inline-block px-4 py-2 rounded-lg font-semibold ${badgeClass}`}>
+              {badgeText}
             </div>
           </div>
 

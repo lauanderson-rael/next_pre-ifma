@@ -18,12 +18,12 @@ export const calcularPorcentagem = (valor: number, total: number): number => {
 
 // Função para formatar resposta para letra
 export const getLetterFromIndex = (index: number): string => {
-  return String.fromCharCode(97 + index); // 97 é 'a'
+  return String.fromCodePoint(97 + index); // 97 é 'a'
 };
 
 // Função para obter índice da letra
 export const getIndexFromLetter = (letter: string): number => {
-  return letter.charCodeAt(0) - 97;
+  return letter.codePointAt(0)! - 97;
 };
 
 // Função para validar se todos os campos estão preenchidos

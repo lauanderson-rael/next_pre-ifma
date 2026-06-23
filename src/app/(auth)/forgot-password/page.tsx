@@ -26,6 +26,7 @@ export default function ForgotPasswordPage() {
          toast.success('E-mail enviado com sucesso!');
          router.push('/login');
       } catch (err) {
+         console.error(err);
          setError('Não foi possível enviar o e-mail. Verifique se está correto.');
       } finally {
          setLoading(false);

@@ -121,11 +121,11 @@ export const toCamelCase = (text: string): string => {
 };
 
 export const toSnakeCase = (text: string): string => {
-  return text.toLowerCase().replace(/\s+/g, '_');
+  return text.toLowerCase().replaceAll(/\s+/g, '_');
 };
 
 export const toKebabCase = (text: string): string => {
-  return text.toLowerCase().replace(/\s+/g, '-');
+  return text.toLowerCase().replaceAll(/\s+/g, '-');
 };
 
 export const titleCase = (text: string): string => {

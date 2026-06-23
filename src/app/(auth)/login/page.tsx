@@ -27,6 +27,7 @@ export default function LoginPage() {
          await signIn(data);
           toast.success('Login realizado com sucesso!')
       } catch (err) {
+         console.error(err);
          setError('Erro no login. Verifique suas credenciais.');
       } finally {
          setLoading(false);

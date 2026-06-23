@@ -39,15 +39,13 @@ export default function ProfilePage() {
 
 
    const [answers, setAnswers] = useState<UserAnswer[]>([]);
-   const [loading, setLoading] = useState(true);
    useEffect(() => {
       api.get("/simulates/results")
          .then((res) => {
             setAnswers(res.data.user_answers)
             console.log("data user: ", res.data.user_answers)
          })
-         .catch((err) => console.error(err))
-         .finally(() => setLoading(false));
+         .catch((err) => console.error(err));
    }, []);
 
    const total = answers.length;
