@@ -11,5 +11,6 @@ SONAR_TOKEN=seu_token_de_acesso
 Execute o comando abaixo na raiz do projeto:
 
 ```bash
+npm test -- --coverage #opcional, so para coletar métricas do teste
 npm run sonar
 ```

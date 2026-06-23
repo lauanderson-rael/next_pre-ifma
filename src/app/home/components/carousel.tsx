@@ -69,8 +69,9 @@ const Carousel: React.FC<CarouselProps> = ({
   }
 
   return (
-    <div
+    <section
       className={`relative w-full md:w-[100%]${className}`}
+      aria-label="Carrossel de imagens"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -141,7 +142,7 @@ const Carousel: React.FC<CarouselProps> = ({
 
       {/* Indicators */}
 
-    </div>
+    </section>
   );
 };
 
